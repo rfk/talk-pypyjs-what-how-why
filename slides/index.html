@@ -192,8 +192,7 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: What?</h2>
-  <h1>Not the first</h1>
+  <h2>Not the First</h2>
   <ul>
   <li>Skulpt</li>
   <li>Brython</li>
@@ -204,30 +203,22 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: What?</h2>
   <h1>An Experiment</h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Compliant</h2>
+  <h2>Compliant</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Fast</h2>
+  <h2>Fast</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: In-Browser</h2>
+  <h2>In-Browser</h2>
   <div class="pyconsole"></div>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js: What?</h2>
-  <h1>Humongous</h1>
-  <p>table of file sizes here</p>
-  <p>open me in new window</p>
   </section>
 
   <section class="slide">
@@ -238,67 +229,91 @@
   </section>
 
   <section class="slide">
+  <h2>Humongous</h2>
+  <div style="text-align: center">
+  <table>
+  <tr><th></th><th>Raw</th><th>GZip</th></tr>
+  <tr><td>pypy.vm.js</td><td>123M</td><td>3M</td></tr>
+  <tr><td>pypy.vm.js.mem</td><td>5M</td><td>1.5M</td></tr>
+  </table>
+  <a href="./pypyjs/index.html" target="_new">(Open Demo in New Tab)</a>
+  </div>
+  </section>
+
+  <section class="slide">
   <h1>How?</h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
   <h1>PyPy</h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
-  <h3>PyPy:</h3>
-  <p>A python interpreter, written in python</p>
-  <p>A compilation toolchain to convert it to C code</p>
-  <p>A just-in-time-compiler generator</p>
+  <h2>PyPy:</h2>
+  <p>A Python interpreter, written in "RPython"</p>
+  <p>A toolchain to translating RPython to C</p>
+  <p>A JIT-Compiler-Generator</p>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
-  <h3>PyPy:</h3>
+  <h2>PyPy: Maybe a diagram will help?</h2>
+  <p>let's draw a diagram</p>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy:</h2>
   <p>Very flexible, highly hackable</p>
   <p>Designed for <i>experimentation</i></p>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
   <h1>Emscripten</h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
-  <h3>Emscripten:</h3>
+  <h2>Emscripten:</h2>
   <p>An LLVM backend that generates JavaScript</p>
+  <p>Simulated POSIX environment, in JavaScript</p>
   <p>Originally for porting games to the web</p>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
-  <h1>"CC=emcc ./configure; make; make install":</h1>
+  <h1>CC=emcc ./configure<br/>make</h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>Emscripten:</h2>
+  <p>Unreal Engine</p>
+  <p>JSMESS</p>
+  <p>FFmpeg</p>
+  <p>vim.js</p>
+  <p>webkit.js</p>
+  </section>
+
+  <section class="slide">
   <h1>asm.js</h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
-  <h3>asm.js</h3>
-  <p>"an extraordinarily optimizable, low-level subset of JavaScript"</p>
-  <p>c = (a|0 + b|0)|0</p>
+  <h2>asm.js</h2>
+  <blockquote>"An extraordinarily optimizable, low-level subset of JavaScript"</blockquote>
+  <pre>
+    function squareit(x) {
+      x = x|0;
+      return (x * x)|0;
+    }
+  </pre>
+  </section>
+
+  <section class="slide">
+  <h2>asm.js</h2>
+  <ul>
+  <li>There is ~90% of a "Virtual CPU" hidden inside JavaScript.</li>
+  </ul>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <h3>asm.js</h3>
-  <p>sample code goes here</p>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js: How?</h2>
-  <h3>So it's:</h3>
   <ul>
   <li>PyPy</li>
   <li>Compiled to JavaScript using Emscripten</li>
@@ -357,8 +372,7 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
-  <p>It's awful all the way down</p>
+  <h1>It's awful<br/>all the way down</h1>
   </section>
 
   <section class="slide">
@@ -367,48 +381,63 @@
 
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
-  <p>Because it's there?</p>
+  <div style="text-align: center;">
+  <img src="./img/smbcPT1.png" style="width: 60%"/>
+  <p><a href="http://www.smbc-comics.com/index.php?id=2088">http://www.smbc-comics.com/index.php?id=2088</a></p>
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
-  <p>Because I want to see what the possibilities are</p>
+  <div style="text-align: center;">
+  <img src="./img/smbcPT2.png" style="width: 60%"/>
+  <p><a href="http://www.smbc-comics.com/index.php?id=2088">http://www.smbc-comics.com/index.php?id=2088</a></p>
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
-  <p>Because we can get an awful lot for free</p>
+  <h1>Free Stuff!</h1>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
-  <p>
+  <br/><br/>
+  <pre style="font-size: 1.5em">
     &lt;script type="text/python"&gt;
+
     print "buh-bye javascript!"
+
     &lt;/script&gt;
-  </p>
+  </pre>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Why?</h2>
-  <p>You're gonna have a bad time...</p>
+  <h1>You're gonna have<br/>a bad time</h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Why?</h2>
-  <p>py2exe =&gt; py2web?</p>
-  <p>"I wanna run this app on the Web"</p>
+  <h2>Consider Brython:</h2>
+  <h1><a href="http://brython.info/">http://brython.info/</a></h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Why?</h2>
-  <p>IPython Notebook?</p>
-  <p>"I wanna do science on the Web"</p>
+  <h1>py2exe =&gt; py2web?</h1>
+  <blockquote>"I can't run my existing software on the web."</blockquote>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Why?</h2>
-  <p>File bugs against the Web!</p>
+  <h1>py2web =&gt; APK</h1>
+  <h1>run on android as well</h1>
+  </section>
+
+  <section class="slide">
+  <h1>IPython Notebook?</h1>
+  <blockquote>"I wanna do some <i><b>science</b></i>."</blockquote>
+  </section>
+
+  <section class="slide">
+  <h1>Please, file bugs<br/>against the Web</h1>
   </section>
 
   <section class="slide">
@@ -416,12 +445,11 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Who?</h2>
   <h1>You!</h1>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Who?</h2>
+  <h2>There's a lot of fun stuff here:</h2>
   <ul>
   <li>API design</li>
   <li>Optimizations</li>
@@ -432,19 +460,27 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Who?</h2>
-  <h1>You. Tomorrow. At the Sprints.</h1>
+  <h1>You.<br/>Tomorrow.<br/>At the Sprints.</h1>
   </section>
 
   <section class="slide">
-  <p>ryan@rfk.id.au</p>
-  <br/>
-  <p>http://pypyjs.org/demo/</p>
-  <p>http://github.com/rfk/pypyjs</p>
-  <br/>
-  <p>http://pypy.org</p>
-  <p>http://emscripten.org</p>
-  <p>http://asmjs.org</p>
+  <div style="text-align: center">
+    <p>http://pypy.org</p>
+    <p>http://emscripten.org</p>
+    <p>http://asmjs.org</p>
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+    <p>ryan@rfk.id.au</p>
+    <p>@rfkelly</p>
+    <br/>
+    <p>http://pypyjs.org/demo/</p>
+    <p>http://github.com/rfk/pypyjs</p>
+    <br/>
+    <p>http://github.com/rfk/talk-pypyjs-what-how-why</p>
+  </div>
   </section>
 
 <script>
@@ -460,9 +496,7 @@
         var $slide = $.deck("getSlide", to);
         var $console = $slide.find(".pyconsole");
         if ($console.length) {
-          window.PyPyVM.ready.then(function() {
-            $("#console").appendTo($console).show();
-          });
+          $("#console").appendTo($console).show().focus();
         } else {
           $("#console").hide();
         }
@@ -474,7 +508,7 @@
 <script>
   $(function () {
     window.jqconsole = $('#console').jqconsole('', '>>> ');
-    var vm = window.PyPyVM = new PyPyJS();
+    var vm = new PyPyJS();
     vm.stdout = vm.stderr = function(data) {
       jqconsole.Write(data, 'jqconsole-output');
     }
