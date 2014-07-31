@@ -19,9 +19,85 @@
   <script src="pypyjs/jqconsole.min.js"></script>
 
   <style>
-  .slide > .diagram {
+  .deck-container .slide h1 {
+    font-size: 3em;
+    text-align: center;
+  }
+  .deck-container .slide h1 .h1sub {
+    font-size: 0.6em;
+  }
+  .deck-container .slide h2 {
+    padding-left: 1em;
+  }
+  .deck-container .slide blockquote {
+    font-size: 1.5em;
+    padding: 0em;
+    border: none;
+  }
+  .deck-container .slide .diagram {
     text-align: center;
     width: 90%;
+  }
+  .deck-container .slide iframe {
+    max-width: none;
+    margin-bottom: 10px;
+  }
+  .deck-container div.run-timer {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    background: black;
+    height: 5px;
+    width: 20px;
+  }
+  .deck-container div.run-timer-toofast {
+    background: blue;
+  }
+  .deck-container div.run-timer-ontrack {
+    background: green;
+  }
+  .deck-container div.run-timer-tooslow {
+    background: red;
+  }
+  .deck-container .console {
+    padding: 0.1em;
+    width: 100%;
+    text-align: center;
+  }
+  #console {
+    position: relative;
+    margin: 1em;
+    width: 80%;
+    height: 300px;
+    text-align: left;
+    background-color:black;
+    font-size: 1em;
+  }
+  .jqconsole {
+      padding: 10px;
+  }
+  .jqconsole-cursor {
+      background-color: gray;
+  }
+  .jqconsole-blurred .jqconsole-cursor {
+      background-color: #666;
+  }
+  .jqconsole-prompt {
+      color: white;
+  }
+  .jqconsole-old-prompt {
+      color: white;
+      font-weight: normal;
+  }
+  .jqconsole-input {
+      color: white;
+  }
+  .jqconsole-old-input {
+      color: #bb0;
+      font-weight: normal;
+  }
+  .jqconsole-output {
+      color: #999;
   }
   </style>
 
@@ -29,8 +105,9 @@
 <body>
 <div class="deck-container">
 
-  <section class="slide">
-  <h1>PyPy.js: What? How? Why?</h1>
+  <section class="slide" style="text-align: center">
+  <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
+  <p>Ryan Kelly<br />ryan@rfk.id.au</br>@rfkelly</p>
   </section>
 
   <section class="slide">
@@ -38,59 +115,71 @@
   </section>
 
   <section class="slide">
-  <h1>The Web</h1>
+  <h1>Mozilla<br/>&#x2764<br/>The Web</h1>
   </section>
 
   <section class="slide">
-  <h1>"The Web is The Platform"</h1>
+  <h2>The Web</h2>
+  <div style="width: 10%; float: left">&nbsp;</div>
+  <div style="width: 40%; float: left">
+    <p><b>Technology:</b></p>
+    <ul>
+      <li>HTTP</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+  </div>
+  <div style="width: 40%; float: left" class="slide">
+    <p><b>Culture:</b></p>
+    <ul>
+      <li>Open</li>
+      <li>Egalitarian</li>
+      <li>Ubiquitous</li>
+      <li>Trustworthy</li>
+      <li>Secure</li>
+    </ul>
+  </div>
   </section>
 
   <section class="slide">
-  <h2>The Web as a Platform</h2>
-  <ul>
-  <li>HTML</li>
-  <li>JavaScript</li>
-  <li>CSS</li>
-  <li>HTTP</li>
-  </ul>
-
-  <ul>
-  <li>Ubiquitous</li>
-  <li>Open</li>
-  <li>Egalitarian</li>
-  <li>Secure (?)</li>
-  </ul>
+  <h1>The Web is worth<br/>Keeping</h1>
   </section>
 
   <section class="slide">
-  <h1>The Web is Worth Saving</h1>
+  <h1>The Web is worth<br/>Improving</h1>
   </section>
 
   <section class="slide">
-  <h1>It's a Bug in The Web</h1>
+  <h1>The Web is worth<br/>Saving</h1>
   </section>
 
   <section class="slide">
-  <p>I want to make a phone-call.</p>
-  <p>Bug!</p>
+  <h2>Andreas Gal, Mozilla CTO:</h2>
+  <blockquote>"For Mozilla, anything that the Web can’t do, or anything that the Web is not faster and better at than native technologies, is a bug."</blockquote>
+  <p>&nbsp;</p>
+  <p style="text-align: center; font-size: 1.2em;" class="slide"><a href="https://bugzilla.mozilla.org/">https://bugzilla.mozilla.org/</a></p>
   </section>
 
   <section class="slide">
-  <p>I want to play AAA game titles.</p>
-  <p>Bug!</p>
+  <h2>A Bug in the Web</h2>
+  <blockquote>"Computing is going Mobile, and the Web is terrible on Mobile."</blockquote>
+  <img src="./img/firefox-os_logo-wordmark_RGB.png" class="slide"/>
   </section>
 
   <section class="slide">
-  <p>I want to write python dammit.</p>
-  <p>Bug!</p>
+  <h2>A Bug in the Web</h2>
+  <blockquote>"The Web can't keep up with the performance demands of modern gaming."</blockquote>
   </section>
 
   <section class="slide">
-  <h1>PyPy.js</h1>
+  <h2>A Bug in the Web</h2>
+  <blockquote>"I want to code in Python dammit"</blockquote>
+  <p class="slide" style="text-align: center; font-size: 1.5em;">???</p>
   </section>
 
-  <section class="slide">
-  <h1>PyPy.js: What? How? Why?</h1>
+  <section class="slide" style="text-align: center">
+  <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   </section>
 
   <section class="slide">
@@ -99,7 +188,7 @@
 
   <section class="slide">
   <h2>PyPy.js: What?</h2>
-  <p>interactive console goes here</p>
+  <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
@@ -120,21 +209,18 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: What?</h2>
-  <h1>Compliant</h1>
-  <p>interactive console goes here</p>
+  <h2>PyPy.js: Compliant</h2>
+  <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: What?</h2>
-  <h1>Fast</h1>
-  <p>interactive console goes here</p>
+  <h2>PyPy.js: Fast</h2>
+  <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: What?</h2>
-  <h1>In-Browser</h1>
-  <p>interactive console goes here</p>
+  <h2>PyPy.js: In-Browser</h2>
+  <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
@@ -142,6 +228,13 @@
   <h1>Humongous</h1>
   <p>table of file sizes here</p>
   <p>open me in new window</p>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js: What?</h2>
+  <div style="text-align: center">
+  <blockquote>"An experiment in building a fast, compliant, in-browser python environment"</blockquote>
+  </div>
   </section>
 
   <section class="slide">
@@ -346,7 +439,7 @@
   <section class="slide">
   <p>ryan@rfk.id.au</p>
   <br/>
-  <p>http://pypyjs.org</p>
+  <p>http://pypyjs.org/demo/</p>
   <p>http://github.com/rfk/pypyjs</p>
   <br/>
   <p>http://pypy.org</p>
@@ -359,6 +452,55 @@
     $.deck('.slide');
   });
 </script>
+
+<script>
+  $(function() {
+    $.deck('.slide');
+    $(document).bind("deck.change", function(event, from, to) {
+        var $slide = $.deck("getSlide", to);
+        var $console = $slide.find(".pyconsole");
+        if ($console.length) {
+          window.PyPyVM.ready.then(function() {
+            $("#console").appendTo($console).show();
+          });
+        } else {
+          $("#console").hide();
+        }
+    });
+  });
+</script>
+
+<div id="console" style="display: hidden"></div>
+<script>
+  $(function () {
+    window.jqconsole = $('#console').jqconsole('', '>>> ');
+    var vm = window.PyPyVM = new PyPyJS();
+    vm.stdout = vm.stderr = function(data) {
+      jqconsole.Write(data, 'jqconsole-output');
+    }
+    vm.ready.then(function() {
+      jqconsole.Reset();
+      vm.stdout('Welcome to PyPy.js!\n')
+      // Create an 'InteractiveConsole' to simulate the python shell.
+      vm.eval('import code').then(function() {
+        vm.eval('c = code.InteractiveConsole()').then(function() {
+          // Prompt for input, send it to the console, rinse, repeat.
+          var doPrompt = function () {
+            jqconsole.Prompt(true, function (input) {
+              var code = input.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+              code = 'c.push(\'' + code + '\')';
+              vm.eval(code).then(function() {
+                setTimeout(doPrompt, 0);
+              });
+            });
+          };
+          doPrompt();
+        });
+      });
+    });
+  });
+</script>
+
 
 </div>
 </body>
