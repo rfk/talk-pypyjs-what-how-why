@@ -19,28 +19,42 @@
   <script src="pypyjs/jqconsole.min.js"></script>
 
   <style>
+  body {
+    overflow: hidden;
+  }
+  .deck-container .slide {
+    font-size: 1.5em;
+    padding: 1em;
+    padding-top: 0.6em;
+    border: none;
+  }
   .deck-container .slide h1 {
-    font-size: 3em;
+    font-size: 2.5em;
     text-align: center;
   }
   .deck-container .slide h1 .h1sub {
-    font-size: 0.6em;
+    font-size: 0.5em;
   }
   .deck-container .slide h2 {
-    padding-left: 1em;
+    padding-left: 1.3em;
   }
   .deck-container .slide blockquote {
-    font-size: 1.5em;
-    padding: 0em;
-    border: none;
+    font-size: 1em;
+  }
+  .deck-container .slide table {
+    font-size: 1em;
+  }
+  .deck-container .slide td {
+    padding: 1em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+  }
+  .deck-container .slide td + td {
+    text-align: right;
   }
   .deck-container .slide .diagram {
     text-align: center;
     width: 90%;
-  }
-  .deck-container .slide iframe {
-    max-width: none;
-    margin-bottom: 10px;
   }
   .deck-container div.run-timer {
     position: absolute;
@@ -68,7 +82,7 @@
     position: relative;
     margin: 1em;
     width: 80%;
-    height: 300px;
+    height: 400px;
     text-align: left;
     background-color:black;
     font-size: 1em;
@@ -115,13 +129,22 @@
   </section>
 
   <section class="slide">
+  <h1>Mozilla</h1>
+  <div style="text-align: center">
+  <img src="./img/firefox_logo-only_RGB.png" style="height: 300px; width:319" />
+  </div>
+  </section>
+
+  <section class="slide">
   <h1>Mozilla<br/>&#x2764<br/>The Web</h1>
   </section>
 
   <section class="slide">
   <h2>The Web</h2>
-  <div style="width: 10%; float: left">&nbsp;</div>
-  <div style="width: 40%; float: left">
+  <!-- uh-huh, table-based layout, like a boss... -->
+  <table style="border: none; width: 100%">
+  <tr><td style="width: 30%">
+  </td><td style="text-align: left;">
     <p><b>Technology:</b></p>
     <ul>
       <li>HTTP</li>
@@ -129,17 +152,17 @@
       <li>CSS</li>
       <li>JavaScript</li>
     </ul>
-  </div>
-  <div style="width: 40%; float: left" class="slide">
+  </td><td style="width: 30%">
+  </td><td style="text-align: left;">
     <p><b>Culture:</b></p>
     <ul>
       <li>Open</li>
-      <li>Egalitarian</li>
       <li>Ubiquitous</li>
       <li>Trustworthy</li>
       <li>Secure</li>
     </ul>
-  </div>
+  </td><td style="width: 30%"> </td></tr>
+  </table>
   </section>
 
   <section class="slide">
@@ -157,14 +180,18 @@
   <section class="slide">
   <h2>Andreas Gal, Mozilla CTO:</h2>
   <blockquote>"For Mozilla, anything that the Web can’t do, or anything that the Web is not faster and better at than native technologies, is a bug."</blockquote>
-  <p>&nbsp;</p>
-  <p style="text-align: center; font-size: 1.2em;" class="slide"><a href="https://bugzilla.mozilla.org/">https://bugzilla.mozilla.org/</a></p>
+  <p style="text-align: center;" class="slide"><a href="https://bugzilla.mozilla.org/">https://bugzilla.mozilla.org/</a></p>
   </section>
 
   <section class="slide">
   <h2>A Bug in the Web</h2>
   <blockquote>"Computing is going Mobile, and the Web is terrible on Mobile."</blockquote>
-  <img src="./img/firefox-os_logo-wordmark_RGB.png" class="slide"/>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center; width: 100%">
+  <img src="./img/firefox-os_logo-wordmark_RGB.png" />
+  </div>
   </section>
 
   <section class="slide">
@@ -173,9 +200,16 @@
   </section>
 
   <section class="slide">
+  Gaming Images Here
+  </section>
+
+  <section class="slide">
   <h2>A Bug in the Web</h2>
   <blockquote>"I want to code in Python dammit"</blockquote>
-  <p class="slide" style="text-align: center; font-size: 1.5em;">???</p>
+  </section>
+
+  <section class="slide">
+  <h1>???</h1>
   </section>
 
   <section class="slide" style="text-align: center">
@@ -192,7 +226,7 @@
   </section>
 
   <section class="slide">
-  <h2>Not the First</h2>
+  <h2>PyPy.js is ... Not the First</h2>
   <ul>
   <li>Skulpt</li>
   <li>Brython</li>
@@ -203,39 +237,86 @@
   </section>
 
   <section class="slide">
-  <h1>An Experiment</h1>
+  <h2>PyPy.js is ... An Experiment</h2>
+  Experiment-related Image Here
   </section>
 
   <section class="slide">
-  <h2>Compliant</h2>
+  <h2>PyPy.js is ... Compliant</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
-  <h2>Fast</h2>
+  <h2>PyPy.js is ... Fast</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
-  <h2>In-Browser</h2>
+  <h2>PyPy.js is ... Fast</h2>
+  <div style="text-align: center">
+  <table style="display: inline">
+  <tr><th></th><th>Cold</th><th>Warm</th></tr>
+  <tr><td>cpython</td><td>15M</td><td>2M</td></tr>
+  <tr><td>pypy.js, firefox</td><td>5.5M</td><td>1.4M</td></tr>
+  <tr><td>pypy.js, chrome</td><td>5.5M</td><td>1.4M</td></tr>
+  <tr><td>pypy</td><td>5.5M</td><td>1.4M</td></tr>
+  </table>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... In-Browser</h2>
+  <pre>
+    var vm = new PyPyJS();
+    vm.ready.then(function() {
+        ...
+    });
+  </pre>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... In-Browser</h2>
+  <pre>
+    vm.eval("import sys; x = sys.platform")
+    .then(function() {
+      vm.get("x").then(function(x) {
+        alert(x);
+      });
+    });
+  </pre>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... In-Browser</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: What?</h2>
+  <h2>PyPy.js is ...</h2>
   <div style="text-align: center">
   <blockquote>"An experiment in building a fast, compliant, in-browser python environment"</blockquote>
+  <p class="slide">But...<p>
   </div>
   </section>
 
   <section class="slide">
-  <h2>Humongous</h2>
+  <h2>PyPy.js is ... Not always Fast</h2>
+  <div class="pyconsole"></div>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... Humongous</h2>
   <div style="text-align: center">
-  <table>
+  <table style="display: inline">
   <tr><th></th><th>Raw</th><th>GZip</th></tr>
-  <tr><td>pypy.vm.js</td><td>123M</td><td>3M</td></tr>
-  <tr><td>pypy.vm.js.mem</td><td>5M</td><td>1.5M</td></tr>
+  <tr><td>pypy.vm.js</td><td>15M</td><td>2M</td></tr>
+  <tr><td>pypy.vm.js.mem</td><td>5.5M</td><td>1.4M</td></tr>
   </table>
+  </div>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... Humongous</h2>
+  <div style="text-align: center">
   <a href="./pypyjs/index.html" target="_new">(Open Demo in New Tab)</a>
   </div>
   </section>
@@ -250,20 +331,25 @@
 
   <section class="slide">
   <h2>PyPy:</h2>
-  <p>A Python interpreter, written in "RPython"</p>
-  <p>A toolchain to translating RPython to C</p>
-  <p>A JIT-Compiler-Generator</p>
+  <ul>
+  <li>A Python interpreter, written in "RPython"</li>
+  <li>A toolchain for translating RPython to C</li>
+  <li>A JIT-Compiler-Generator</li>
+  </ul>
   </section>
 
   <section class="slide">
-  <h2>PyPy: Maybe a diagram will help?</h2>
+  <h2>PyPy:</h2>
   <p>let's draw a diagram</p>
   </section>
 
   <section class="slide">
   <h2>PyPy:</h2>
-  <p>Very flexible, highly hackable</p>
-  <p>Designed for <i>experimentation</i></p>
+  <ul>
+  <li>Excellent layering &amp; separation of concerns</li>
+  <li>Flexible and Hackable</li>
+  <li>A platform for <i>experimentation</i></li>
+  </ul>
   </section>
 
   <section class="slide">
@@ -272,22 +358,28 @@
 
   <section class="slide">
   <h2>Emscripten:</h2>
-  <p>An LLVM backend that generates JavaScript</p>
-  <p>Simulated POSIX environment, in JavaScript</p>
-  <p>Originally for porting games to the web</p>
-  </section>
-
-  <section class="slide">
-  <h1>CC=emcc ./configure<br/>make</h1>
+  <ul>
+  <li>An LLVM backend that generates JavaScript</li>
+  <li>A simulated POSIX environment, in JavaScript</li>
+  <li>Originally for porting games to the web</li>
+  </ul>
   </section>
 
   <section class="slide">
   <h2>Emscripten:</h2>
-  <p>Unreal Engine</p>
-  <p>JSMESS</p>
-  <p>FFmpeg</p>
-  <p>vim.js</p>
-  <p>webkit.js</p>
+  Another diagram
+  </section>
+
+  <section class="slide">
+  <h2>Emscripten:</h2>
+  <p>Examples:</p>
+  <ul>
+  <li>Unreal Engine</li>
+  <li>JSMESS</li>
+  <li>FFmpeg</li>
+  <li>Vim</li>
+  <li>WebKit</li>
+  </ul>
   </section>
 
   <section class="slide">
@@ -297,28 +389,18 @@
   <section class="slide">
   <h2>asm.js</h2>
   <blockquote>"An extraordinarily optimizable, low-level subset of JavaScript"</blockquote>
+  <p>&nbsp;</p>
+  <div style="text-align: center; width:100%">There is ~90% of a "Virtual CPU" hidden inside JavaScript!</div>
+  </section>
+
+  <section class="slide">
+  <h2>asm.js</h2>
   <pre>
     function squareit(x) {
       x = x|0;
       return (x * x)|0;
     }
   </pre>
-  </section>
-
-  <section class="slide">
-  <h2>asm.js</h2>
-  <ul>
-  <li>There is ~90% of a "Virtual CPU" hidden inside JavaScript.</li>
-  </ul>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js: How?</h2>
-  <ul>
-  <li>PyPy</li>
-  <li>Compiled to JavaScript using Emscripten</li>
-  <li>With an asm.js JIT backend</li>
-  </ul>
   </section>
 
   <section class="slide">
@@ -362,6 +444,15 @@
   </section>
 
   <section class="slide">
+  <h1>Awful?</h1>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js: How?</h2>
+  <img class="diagram" src="./img/flow_diagram_7.svg" />
+  </section>
+
+  <section class="slide">
   <h2>PyPy.js: How?</h2>
   <img class="diagram" src="./img/flow_diagram_8.svg" />
   </section>
@@ -382,7 +473,7 @@
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
   <div style="text-align: center;">
-  <img src="./img/smbcPT1.png" style="width: 60%"/>
+  <img src="./img/smbcPT1.png" style="width: 45%"/>
   <p><a href="http://www.smbc-comics.com/index.php?id=2088">http://www.smbc-comics.com/index.php?id=2088</a></p>
   </div>
   </section>
@@ -390,19 +481,19 @@
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
   <div style="text-align: center;">
-  <img src="./img/smbcPT2.png" style="width: 60%"/>
+  <img src="./img/smbcPT2.png" style="width: 45%"/>
   <p><a href="http://www.smbc-comics.com/index.php?id=2088">http://www.smbc-comics.com/index.php?id=2088</a></p>
   </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
+  <br/>
   <h1>Free Stuff!</h1>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
-  <br/><br/>
   <pre style="font-size: 1.5em">
     &lt;script type="text/python"&gt;
 
@@ -417,23 +508,38 @@
   </section>
 
   <section class="slide">
-  <h2>Consider Brython:</h2>
-  <h1><a href="http://brython.info/">http://brython.info/</a></h1>
+  <h2>Consider Alternatives</h2>
+  <ul>
+  <li>http://brython.info</li>
+  <li>http://github.com/PythonJS</li>
+  </ul>
   </section>
 
   <section class="slide">
-  <h1>py2exe =&gt; py2web?</h1>
-  <blockquote>"I can't run my existing software on the web."</blockquote>
+  <h1>py2exe</h1>
   </section>
 
   <section class="slide">
-  <h1>py2web =&gt; APK</h1>
-  <h1>run on android as well</h1>
+  <h1>py2web</h1>
   </section>
 
   <section class="slide">
-  <h1>IPython Notebook?</h1>
-  <blockquote>"I wanna do some <i><b>science</b></i>."</blockquote>
+  <h1>py2web</h1>
+  <h1>+ manifest.webapp</h1>
+  </section>
+
+  <section class="slide">
+  <h1>py2web</h1>
+  <h1>+ APK Factory</h1>
+  </section>
+
+  <section class="slide">
+  <h1>IPython Notebook</h1>
+  </section>
+
+  <section class="slide">
+  <h1>IPython Notebook</h1>
+  <h1>+ NumPyPy</h1>
   </section>
 
   <section class="slide">
@@ -476,9 +582,7 @@
     <p>ryan@rfk.id.au</p>
     <p>@rfkelly</p>
     <br/>
-    <p>http://pypyjs.org/demo/</p>
-    <p>http://github.com/rfk/pypyjs</p>
-    <br/>
+    <p>http://pypyjs.org/</p>
     <p>http://github.com/rfk/talk-pypyjs-what-how-why</p>
   </div>
   </section>
@@ -496,7 +600,10 @@
         var $slide = $.deck("getSlide", to);
         var $console = $slide.find(".pyconsole");
         if ($console.length) {
-          $("#console").appendTo($console).show().focus();
+          $("#console").appendTo($console).show();
+          window.jqconsole.Reset();
+          window.jqconsole.BeginPromptLoop();
+          window.jqconsole.Focus();
         } else {
           $("#console").hide();
         }
@@ -508,7 +615,7 @@
 <script>
   $(function () {
     window.jqconsole = $('#console').jqconsole('', '>>> ');
-    var vm = new PyPyJS();
+    window.vm = new PyPyJS();
     vm.stdout = vm.stderr = function(data) {
       jqconsole.Write(data, 'jqconsole-output');
     }
@@ -519,16 +626,25 @@
       vm.eval('import code').then(function() {
         vm.eval('c = code.InteractiveConsole()').then(function() {
           // Prompt for input, send it to the console, rinse, repeat.
-          var doPrompt = function () {
+          jqconsole.BeginPromptLoop = function () {
             jqconsole.Prompt(true, function (input) {
               var code = input.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
-              code = 'c.push(\'' + code + '\')';
+              code = 'r = c.push(\'' + code + '\')';
               vm.eval(code).then(function() {
-                setTimeout(doPrompt, 0);
+                return vm.get('r').then(function(r) {
+                  if (r) {
+                    jqconsole.SetPromptLabel("... ");
+                  } else {
+                    jqconsole.SetPromptLabel(">>> ");
+                  }
+                  setTimeout(jqconsole.BeginPromptLoop, 0);
+                });
               });
             });
           };
-          doPrompt();
+          jqconsole.BeginPromptLoop();
+          // Start hidden.
+          $("#console").hide();
         });
       });
     });
