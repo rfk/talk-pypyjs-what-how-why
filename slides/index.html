@@ -64,21 +64,25 @@
     text-align: center;
     width: 90%;
   }
-  .deck-container div.run-timer {
+  .run-timer {
     position: absolute;
-    bottom: 0px;
-    left: 0px;
+    top: 0px;
+    right: 0px;
     background: black;
     height: 5px;
-    width: 20px;
+    width: 10px;
+    opacity: 0.5;
   }
-  .deck-container div.run-timer-toofast {
+  .run-timer-slow-down {
     background: blue;
   }
-  .deck-container div.run-timer-ontrack {
+  .run-timer-on-track {
     background: green;
   }
-  .deck-container div.run-timer-tooslow {
+  .run-timer-move-on {
+    background: orange;
+  }
+  .run-timer-hurry-up {
     background: red;
   }
   .deck-container .console {
@@ -128,7 +132,9 @@
 <body>
 <div class="deck-container">
 
-  <section class="slide" style="text-align: center">
+  <div class="run-timer"></div>
+
+  <section class="slide" style="text-align: center" run-time-min="0" run-time-max="240">
   <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   <p>Ryan Kelly<br />ryan@rfk.id.au</br>@rfkelly</p>
   </section>
@@ -232,7 +238,7 @@
   <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-min="240" run-time-max="600">
   <h1>What?</h1>
   </section>
 
@@ -400,7 +406,7 @@
   </div>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-min="600" run-time-max="960">
   <h1>How?</h1>
   </section>
 
@@ -629,7 +635,7 @@
   <h1>It's awful<br/>all the way down</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-min="960" run-time-max="1200">
   <h1>Why?</h1>
   </section>
 
@@ -647,12 +653,6 @@
   <img src="./img/smbcPT2.png" style="width: 45%"/>
   <p><a href="http://www.smbc-comics.com/index.php?id=2088">http://www.smbc-comics.com/index.php?id=2088</a></p>
   </div>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js: Why?</h2>
-  <br/>
-  <h1>Free Stuff!</h1>
   </section>
 
   <section class="slide">
@@ -707,10 +707,16 @@
   </section>
 
   <section class="slide">
-  <h1>Please, file bugs<br/>against the Web</h1>
+  <h2>PyPy.js: Why?</h2>
+  <br/>
+  <h1>Free Stuff!</h1>
   </section>
 
   <section class="slide">
+  <h1>Please, file bugs<br/>against the Web</h1>
+  </section>
+
+  <section class="slide" run-time-min="1200" run-time-max="1400">
   <h1>Who?</h1>
   </section>
 
@@ -752,18 +758,73 @@
 <script>
   $(function() {
     $.deck('.slide');
+    var $allSlides = $(".slide");
+    var $slide = null;
+    var talkStartTime = null;
     $(document).bind("deck.change", function(event, from, to) {
-        var $slide = $.deck("getSlide", to);
-        var $console = $slide.find(".pyconsole");
-        if ($console.length) {
-          $("#console").appendTo($console).show();
-          window.jqconsole.Reset();
-          window.jqconsole.BeginPromptLoop();
-          window.jqconsole.Focus();
-        } else {
-          $("#console").hide();
-        }
+      $slide = $.deck("getSlide", to);
+      var $console = $slide.find(".pyconsole");
+      if ($console.length) {
+        $("#console").appendTo($console).show();
+        window.jqconsole.Reset();
+        window.jqconsole.BeginPromptLoop();
+        window.jqconsole.Focus();
+      } else {
+        $("#console").hide();
+      }
+      updateRunTimer();
     });
+    function updateRunTimer() {
+      // Clear previous status, if any.
+      var $runTimer = $(".run-timer");
+      $runTimer.removeClass("run-timer-slow-down")
+               .removeClass("run-timer-on-track")
+               .removeClass("run-timer-move-on")
+               .removeClass("run-timer-hurry-up")
+      // Find the nearest slide with min/max runtime set.
+      if (!$slide || !$slide.length) return;
+      var curpos = 0;
+      while (curpos < $allSlides.length) {
+        if ($allSlides[curpos] == $slide[0]) {
+          break;
+        }
+        curpos++;
+      }
+      var i = curpos - 1;
+      var runTimeMin = $slide.attr("run-time-min");
+      while (!runTimeMin && i >= 0) {
+        runTimeMin = $allSlides.eq(i).attr("run-time-min");
+        i--;
+      }
+      i = curpos - 1;
+      var runTimeMax = $slide.attr("run-time-max");
+      while (!runTimeMax && i >= 0) {
+        runTimeMax = $allSlides.eq(i).attr("run-time-max");
+        i--;
+      }
+      // Tweak status of runtime tracker accordingly.
+      if($slide[0] != $allSlides[0]) {
+        if(talkStartTime == null) {
+          talkStartTime = Math.round((new Date()).getTime() / 1000);
+        }
+        var runTime = Math.round((new Date()).getTime() / 1000) - talkStartTime;
+        console.log("runtime", runTime, runTimeMin, runTimeMax);
+        if (runTimeMin && runTime < parseInt(runTimeMin, 10)|0) {
+          $runTimer.addClass("run-timer-slow-down")
+          console.log("slow down");
+        } else if (runTimeMax && runTime >= parseInt(runTimeMax, 10)|0) {
+          $runTimer.addClass("run-timer-hurry-up")
+          console.log("hurry up");
+        } else if (runTimeMax && runTime >= (parseInt(runTimeMax, 10)|0) - 30) {
+          console.log("move on");
+          $runTimer.addClass("run-timer-move-on")
+        } else {
+          console.log("on track");
+          $runTimer.addClass("run-timer-on-track")
+        }
+      }
+    }
+    setInterval(updateRunTimer, 5*1000);
   });
 </script>
 
