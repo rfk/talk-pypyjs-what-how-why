@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="24cm" height="11cm" viewBox="164 103 473 214" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <rect style="fill: none; fill-opacity:0; stroke-width: 2.35099e-37; stroke: #000000" x="164" y="103.75" width="473" height="213.25"/>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="704" y="388">
+    <tspan x="704" y="388"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="221.3" y="189.3" width="100.7" height="43.7"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="221.3" y="189.3" width="100.7" height="43.7"/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="240.3" y="214.8">
+    <tspan x="240.3" y="214.8">mycode.c</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="333" y="223">
+    <tspan x="333" y="223"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="352.3" y="190.3" width="99.7" height="41.45"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="352.3" y="190.3" width="99.7" height="41.45"/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="368.3" y="213.8">
+    <tspan x="368.3" y="213.8">mycode.js</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="487" y="220">
+    <tspan x="487" y="220"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="402.15" y="211.025">
+    <tspan x="402.15" y="211.025"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="657.15" y="389.3">
+    <tspan x="657.15" y="389.3"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="652.15" y="389.3">
+    <tspan x="652.15" y="389.3"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="561" y="135">
+    <tspan x="561" y="135"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="538.15" y="210.525">
+    <tspan x="538.15" y="210.525"></tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke-dasharray: 4; stroke: #000000" d="M 369.975,182.398 A 53.3447,53.3447 0 0 0 287,184.75"/>
+    <polygon style="fill: #000000" points="372.771,185.882 366.967,182.519 370.297,182.123 371.979,179.221 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="372.771,185.882 366.967,182.519 370.297,182.123 371.979,179.221 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="513" y="147">
+    <tspan x="513" y="147"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="310.8" y="153.8">
+    <tspan x="310.8" y="153.8">emcc</tspan>
+  </text>
+</svg>

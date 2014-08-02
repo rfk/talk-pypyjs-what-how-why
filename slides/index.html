@@ -52,7 +52,15 @@
   .deck-container .slide td + td {
     text-align: right;
   }
-  .deck-container .slide .diagram {
+  .deck-container .slide .pypy-flow {
+    text-align: center;
+    width: 60%;
+  }
+  .deck-container .slide .emscripten-flow {
+    text-align: center;
+    width: 70%;
+  }
+  .deck-container .slide .pypyjs-flow {
     text-align: center;
     width: 90%;
   }
@@ -81,10 +89,11 @@
   #console {
     position: relative;
     margin: 1em;
-    width: 80%;
-    height: 400px;
+    width: 90%;
+    height: 380px;
     text-align: left;
-    background-color:black;
+    background-color: white;
+    border: 1px solid #333;
     font-size: 1em;
   }
   .jqconsole {
@@ -94,24 +103,24 @@
       background-color: gray;
   }
   .jqconsole-blurred .jqconsole-cursor {
-      background-color: #666;
+      background-color: #333;
   }
   .jqconsole-prompt {
-      color: white;
+      color: black;
   }
   .jqconsole-old-prompt {
-      color: white;
+      color: black;
       font-weight: normal;
   }
   .jqconsole-input {
-      color: white;
+      color: black;
   }
   .jqconsole-old-input {
       color: #bb0;
       font-weight: normal;
   }
   .jqconsole-output {
-      color: #999;
+      color: #666;
   }
   </style>
 
@@ -158,8 +167,8 @@
     <ul>
       <li>Open</li>
       <li>Ubiquitous</li>
-      <li>Trustworthy</li>
       <li>Secure</li>
+      <li>Trustworthy</li>
     </ul>
   </td><td style="width: 30%"> </td></tr>
   </table>
@@ -189,6 +198,7 @@
   </section>
 
   <section class="slide">
+  <br/>
   <div style="text-align: center; width: 100%">
   <img src="./img/firefox-os_logo-wordmark_RGB.png" />
   </div>
@@ -200,7 +210,12 @@
   </section>
 
   <section class="slide">
-  Gaming Images Here
+  <br/>
+  <table style="width: 100%"><tr><td style="text-align: center; width: 50%">
+  <img src="./img/Unity_3D_logo.png" style="width: 70%" />
+  </td><td style="text-align: center; width: 50%">
+  <img src="./img/Unreal_Engine_3_logo_and_wordmark.png" style="width: 70%" />
+  </td></tr></table>
   </section>
 
   <section class="slide">
@@ -209,6 +224,7 @@
   </section>
 
   <section class="slide">
+  <br />
   <h1>???</h1>
   </section>
 
@@ -227,18 +243,30 @@
 
   <section class="slide">
   <h2>PyPy.js is ... Not the First</h2>
-  <ul>
-  <li>Skulpt</li>
-  <li>Brython</li>
-  <li>Pyjamas</li>
-  <li>PythonJS</li>
-  <li>...?</li>
-  </ul>
+  <div style="text-align: center">
+  <table style="width: 90%; display: inline"><tr><td>
+    <ul>
+    <li><span style="text-decoration: line-through">Pyjamas</span> PyJS</li>
+    <li>Skulpt</li>
+    <li>Brython</li>
+    <li>PythonJS</li>
+    </ul>
+  </td><td style="width: 10%"></td><td style="text-align: left">
+    <ul>
+    <li>RapydScript</li>
+    <li>Pystachio</li>
+    <li>Pyjaco</li>
+    <li>...?</li>
+    </ul>
+  </td></tr></table>
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js is ... An Experiment</h2>
-  Experiment-related Image Here
+  <div style="text-align: center">
+  <img src="./img/no-idea-what-im-doing.jpg" style="width: 60%" />
+  </div>
   </section>
 
   <section class="slide">
@@ -252,14 +280,38 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js is ... Fast</h2>
+  <h2>PyPy.js is ... Fast (Enough)</h2>
   <div style="text-align: center">
   <table style="display: inline">
   <tr><th></th><th>Cold</th><th>Warm</th></tr>
-  <tr><td>cpython</td><td>15M</td><td>2M</td></tr>
-  <tr><td>pypy.js, firefox</td><td>5.5M</td><td>1.4M</td></tr>
-  <tr><td>pypy.js, chrome</td><td>5.5M</td><td>1.4M</td></tr>
-  <tr><td>pypy</td><td>5.5M</td><td>1.4M</td></tr>
+  <tr><td>cpython</td><td>80 kpy/s</td><td>80 kpy/s</td></tr>
+  <tr><td>pypy.js, firefox</td><td>40 kpy/s</td><td>150 kpy/s</td></tr>
+  <tr style="opacity:0"><td>pypy.js, chrome</td><td>10 kpy/s</td><td>220 kpy/s</td></tr>
+  <tr style="opacity:0"><td>pypy</td><td>700 kpy/s</td><td>2500 kpy/s</td></tr>
+  </table>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... Fast (Enough)</h2>
+  <div style="text-align: center">
+  <table style="display: inline">
+  <tr><th></th><th>Cold</th><th>Warm</th></tr>
+  <tr><td>cpython</td><td>80 kpy/s</td><td>80 kpy/s</td></tr>
+  <tr><td>pypy.js, firefox</td><td>40 kpy/s</td><td>150 kpy/s</td></tr>
+  <tr><td>pypy.js, chrome</td><td>10 kpy/s</td><td>220 kpy/s</td></tr>
+  <tr style="opacity:0"><td>pypy</td><td>700 kpy/s</td><td>2500 kpy/s</td></tr>
+  </table>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... Fast (Enough)</h2>
+  <div style="text-align: center">
+  <table style="display: inline">
+  <tr><th></th><th>Cold</th><th>Warm</th></tr>
+  <tr><td>cpython</td><td>80 kpy/s</td><td>80 kpy/s</td></tr>
+  <tr><td>pypy.js, firefox</td><td>40 kpy/s</td><td>150 kpy/s</td></tr>
+  <tr><td>pypy.js, chrome</td><td>10 kpy/s</td><td>220 kpy/s</td></tr>
+  <tr><td>pypy</td><td>700 kpy/s</td><td>2500 kpy/s</td></tr>
   </table>
   </section>
 
@@ -267,21 +319,47 @@
   <h2>PyPy.js is ... In-Browser</h2>
   <pre>
     var vm = new PyPyJS();
-    vm.ready.then(function() {
-        ...
-    });
+
+    vm.ready.then(function(){ ... })
   </pre>
   </section>
 
   <section class="slide">
   <h2>PyPy.js is ... In-Browser</h2>
   <pre>
-    vm.eval("import sys; x = sys.platform")
-    .then(function() {
-      vm.get("x").then(function(x) {
-        alert(x);
-      });
-    });
+    var vm = new PyPyJS();
+
+    vm.ready.then(function(){ ... })
+
+    vm.set("x", 12).then(...)
+  </pre>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... In-Browser</h2>
+  <pre>
+    var vm = new PyPyJS();
+
+    vm.ready.then(function(){ ... })
+
+    vm.set("x", 12).then(...)
+
+    vm.eval("x = x + 1").then(...)
+  </pre>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy.js is ... In-Browser</h2>
+  <pre>
+    var vm = new PyPyJS();
+
+    vm.ready.then(function(){ ... })
+
+    vm.set("x", 12).then(...)
+
+    vm.eval("x = x + 1").then(...)
+
+    vm.get("x").then(...)
   </pre>
   </section>
 
@@ -317,6 +395,7 @@
   <section class="slide">
   <h2>PyPy.js is ... Humongous</h2>
   <div style="text-align: center">
+  <br/><br/>
   <a href="./pypyjs/index.html" target="_new">(Open Demo in New Tab)</a>
   </div>
   </section>
@@ -340,7 +419,44 @@
 
   <section class="slide">
   <h2>PyPy:</h2>
-  <p>let's draw a diagram</p>
+  <div style="text-align: center">
+  <img class="pypy-flow" src="./img/pypy_flow/flow_diagram_0.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy:</h2>
+  <div style="text-align: center">
+  <img class="pypy-flow" src="./img/pypy_flow/flow_diagram_1.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy:</h2>
+  <div style="text-align: center">
+  <img class="pypy-flow" src="./img/pypy_flow/flow_diagram_2.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy:</h2>
+  <div style="text-align: center">
+  <img class="pypy-flow" src="./img/pypy_flow/flow_diagram_3.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy:</h2>
+  <div style="text-align: center">
+  <img class="pypy-flow" src="./img/pypy_flow/flow_diagram_4.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <h2>PyPy:</h2>
+  <div style="text-align: center">
+  <img class="pypy-flow" src="./img/pypy_flow/flow_diagram_5.svg" />
+  </div>
   </section>
 
   <section class="slide">
@@ -367,19 +483,30 @@
 
   <section class="slide">
   <h2>Emscripten:</h2>
-  Another diagram
+  <div style="text-align: center">
+  <img class="emscripten-flow" src="./img/emscripten_flow/flow_diagram_0.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>Emscripten:</h2>
-  <p>Examples:</p>
-  <ul>
-  <li>Unreal Engine</li>
-  <li>JSMESS</li>
-  <li>FFmpeg</li>
-  <li>Vim</li>
-  <li>WebKit</li>
-  </ul>
+  <div style="text-align: center">
+  <img class="emscripten-flow" src="./img/emscripten_flow/flow_diagram_1.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <h2>Emscripten:</h2>
+  <div style="text-align: center">
+  <img class="emscripten-flow" src="./img/emscripten_flow/flow_diagram_2.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <h2>Emscripten:</h2>
+  <div style="text-align: center">
+  <img class="emscripten-flow" src="./img/emscripten_flow/flow_diagram_3.svg" />
+  </div>
   </section>
 
   <section class="slide">
@@ -394,53 +521,83 @@
   </section>
 
   <section class="slide">
-  <h2>asm.js</h2>
-  <pre>
-    function squareit(x) {
-      x = x|0;
-      return (x * x)|0;
-    }
+  <br />
+  <pre style="font-size: 0.8em;">
+        function DiagModule(stdlib) {
+
+            "use asm";
+
+            var sqrt = stdlib.Math.sqrt;
+
+            function square(x) {
+                x = +x;
+                return +(x*x);
+            }
+
+            function diag(x, y) {
+                x = +x; y = +y;
+                return +sqrt(+square(x) + +square(y));
+            }
+
+            return { diag: diag };
+        }
   </pre>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_0.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_0.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_1.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_1.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_2.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_2.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_3.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_3.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_4.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_4.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_5.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_5.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_6.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_6.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_7.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_7.svg" />
+  </div>
   </section>
 
   <section class="slide">
@@ -449,17 +606,23 @@
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_7.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_7.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_8.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_8.svg" />
+  </div>
   </section>
 
   <section class="slide">
   <h2>PyPy.js: How?</h2>
-  <img class="diagram" src="./img/flow_diagram_9.svg" />
+  <div style="text-align: center">
+  <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_9.svg" />
+  </div>
   </section>
 
   <section class="slide">
@@ -494,10 +657,11 @@
 
   <section class="slide">
   <h2>PyPy.js: Why?</h2>
+  <span style="font-size:0.2em"><br/></span>
   <pre style="font-size: 1.5em">
     &lt;script type="text/python"&gt;
 
-    print "buh-bye javascript!"
+    print("buh-bye javascript!")
 
     &lt;/script&gt;
   </pre>
@@ -567,14 +731,6 @@
 
   <section class="slide">
   <h1>You.<br/>Tomorrow.<br/>At the Sprints.</h1>
-  </section>
-
-  <section class="slide">
-  <div style="text-align: center">
-    <p>http://pypy.org</p>
-    <p>http://emscripten.org</p>
-    <p>http://asmjs.org</p>
-  </div>
   </section>
 
   <section class="slide">
