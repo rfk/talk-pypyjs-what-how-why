@@ -214,39 +214,9 @@
   </section>
 
   <section class="slide">
-  <h1>The Web is worth<br/>Saving</h1>
-  </section>
-
-  <section class="slide" run-time-waypoint="120">
   <h2>Andreas Gal, Mozilla CTO:</h2>
   <blockquote>"For Mozilla, anything that the Web can’t do, or anything that the Web is not faster and better at than native technologies, is a bug."</blockquote>
-  <p style="text-align: center;" class="slide"><a href="https://bugzilla.mozilla.org/">https://bugzilla.mozilla.org/</a></p>
-  </section>
-
-  <section class="slide">
-  <h2>A Bug in the Web</h2>
-  <blockquote>"Computing is going Mobile, and the Web is terrible on Mobile."</blockquote>
-  </section>
-
-  <section class="slide">
-  <br/>
-  <div style="text-align: center; width: 100%">
-  <img src="./img/firefox-os_logo-wordmark_RGB.png" />
-  </div>
-  </section>
-
-  <section class="slide">
-  <h2>A Bug in the Web</h2>
-  <blockquote>"The Web can't keep up with the performance demands of modern gaming."</blockquote>
-  </section>
-
-  <section class="slide">
-  <br/>
-  <table style="width: 100%"><tr><td style="text-align: center; width: 50%">
-  <img src="./img/Unity_3D_logo.png" style="width: 70%" />
-  </td><td style="text-align: center; width: 50%">
-  <img src="./img/Unreal_Engine_3_logo_and_wordmark.png" style="width: 70%" />
-  </td></tr></table>
+  <p style="text-align: center; font-size: 0.8em"><a href="https://bugzilla.mozilla.org/">https://bugzilla.mozilla.org/</a></p>
   </section>
 
   <section class="slide">
@@ -254,16 +224,11 @@
   <blockquote>"I want to code in Python dammit"</blockquote>
   </section>
 
-  <section class="slide">
-  <br />
-  <h1>???</h1>
-  </section>
-
-  <section class="slide" style="text-align: center">
+  <section class="slide" style="text-align: center" run-time-waypoint="180">
   <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   </section>
 
-  <section class="slide" run-time-waypoint="240">
+  <section class="slide">
   <h1>What?</h1>
   </section>
 
@@ -300,38 +265,14 @@
   </div>
   </section>
 
-  <section class="slide" run-time-waypoint="300">
+  <section class="slide" run-time-waypoint="240">
   <h2>PyPy.js is ... Compliant</h2>
   <div class="pyconsole"></div>
   </section>
 
-  <section class="slide" run-time-waypoint="360">
+  <section class="slide" run-time-waypoint="300">
   <h2>PyPy.js is ... Fast</h2>
   <div class="pyconsole"></div>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js is ... Fast (Enough)</h2>
-  <div style="text-align: center">
-  <table style="display: inline">
-  <tr><th></th><th>Cold</th><th>Warm</th></tr>
-  <tr><td>cpython</td><td>80 kpy/s</td><td>80 kpy/s</td></tr>
-  <tr><td>pypy.js, firefox</td><td>40 kpy/s</td><td>150 kpy/s</td></tr>
-  <tr style="opacity:0"><td>pypy.js, chrome</td><td>10 kpy/s</td><td>220 kpy/s</td></tr>
-  <tr style="opacity:0"><td>pypy</td><td>700 kpy/s</td><td>2500 kpy/s</td></tr>
-  </table>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js is ... Fast (Enough)</h2>
-  <div style="text-align: center">
-  <table style="display: inline">
-  <tr><th></th><th>Cold</th><th>Warm</th></tr>
-  <tr><td>cpython</td><td>80 kpy/s</td><td>80 kpy/s</td></tr>
-  <tr><td>pypy.js, firefox</td><td>40 kpy/s</td><td>150 kpy/s</td></tr>
-  <tr><td>pypy.js, chrome</td><td>10 kpy/s</td><td>220 kpy/s</td></tr>
-  <tr style="opacity:0"><td>pypy</td><td>700 kpy/s</td><td>2500 kpy/s</td></tr>
-  </table>
   </section>
 
   <section class="slide">
@@ -346,40 +287,7 @@
   </table>
   </section>
 
-  <section class="slide" run-time-waypoint="480">
-  <h2>PyPy.js is ... In-Browser</h2>
-  <pre>
-    var vm = new PyPyJS();
-
-    vm.ready.then(function(){ ... })
-  </pre>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js is ... In-Browser</h2>
-  <pre>
-    var vm = new PyPyJS();
-
-    vm.ready.then(function(){ ... })
-
-    vm.set("x", 12).then(...)
-  </pre>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js is ... In-Browser</h2>
-  <pre>
-    var vm = new PyPyJS();
-
-    vm.ready.then(function(){ ... })
-
-    vm.set("x", 12).then(...)
-
-    vm.eval("x = x + 1").then(...)
-  </pre>
-  </section>
-
-  <section class="slide">
+  <section class="slide" run-time-waypoint="510">
   <h2>PyPy.js is ... In-Browser</h2>
   <pre>
     var vm = new PyPyJS();
@@ -399,7 +307,7 @@
   <div class="pyconsole"></div>
   </section>
 
-  <section class="slide" run-time-waypoint="600">
+  <section class="slide" run-time-waypoint="690">
   <h2>PyPy.js is ...</h2>
   <div style="text-align: center">
   <blockquote>"An experiment in building a fast, compliant, in-browser python environment"</blockquote>
@@ -431,7 +339,7 @@
   </div>
   </section>
 
-  <section class="slide" run-time-waypoint="660">
+  <section class="slide" run-time-waypoint="780">
   <h1>How?</h1>
   </section>
 
@@ -503,7 +411,7 @@
   <h1>Emscripten</h1>
   </section>
 
-  <section class="slide" run-time-waypoint="780">
+  <section class="slide" run-time-waypoint="960">
   <h2>Emscripten:</h2>
   <ul>
   <li>An LLVM backend that generates JavaScript</li>
@@ -541,10 +449,6 @@
   </section>
 
   <section class="slide">
-  <h1>asm.js</h1>
-  </section>
-
-  <section class="slide" run-time-waypoint="900">
   <h2>asm.js</h2>
   <blockquote>"An extraordinarily optimizable, low-level subset of JavaScript"</blockquote>
   <p>&nbsp;</p>
@@ -575,7 +479,7 @@
   </pre>
   </section>
 
-  <section class="slide" run-time-waypoint="960">
+  <section class="slide" run-time-waypoint="1140">
   <h2>PyPy.js: How?</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_0.svg" />
@@ -660,7 +564,7 @@
   <h1>It's awful<br/>all the way down</h1>
   </section>
 
-  <section class="slide" run-time-waypoint="1080">
+  <section class="slide" run-time-waypoint="1260">
   <h1>Why?</h1>
   </section>
 
@@ -713,22 +617,7 @@
   </section>
 
   <section class="slide">
-  <h1>py2web</h1>
-  <h1>+ manifest.webapp</h1>
-  </section>
-
-  <section class="slide">
-  <h1>py2web</h1>
-  <h1>+ APK Factory</h1>
-  </section>
-
-  <section class="slide">
   <h1>IPython Notebook</h1>
-  </section>
-
-  <section class="slide">
-  <h1>IPython Notebook</h1>
-  <h1>+ NumPyPy</h1>
   </section>
 
   <section class="slide">
@@ -740,7 +629,7 @@
   <h1>Please, file bugs<br/>against the Web</h1>
   </section>
 
-  <section class="slide" run-time-waypoint="1260">
+  <section class="slide" run-time-waypoint="1440">
   <h1>Who?</h1>
   </section>
 
@@ -749,21 +638,10 @@
   </section>
 
   <section class="slide">
-  <h2>There's a lot of fun stuff here:</h2>
-  <ul>
-  <li>API design</li>
-  <li>Optimizations</li>
-  <li>Algorithms</li>
-  <li>Tooling</li>
-  <li>And much more!</li>
-  </ul>
-  </section>
-
-  <section class="slide">
   <h1>You.<br/>Tomorrow.<br/>At the Sprints.</h1>
   </section>
 
-  <section class="slide" run-time-waypoint="1400">
+  <section class="slide" run-time-waypoint="1500">
   <div style="text-align: center">
     <p>ryan@rfk.id.au</p>
     <p>@rfkelly</p>
