@@ -749,83 +749,82 @@
   </div>
   </section>
 
-<script>
-  $(function() {
-    $.deck('.slide');
-  });
-</script>
+<script type="text/python">
 
-<script>
-  $(function() {
-    $.deck('.slide');
-    var $allSlides = $(".slide");
-    var $slide = null;
-    var talkStartTime = null;
-    $(document).bind("deck.change", function(event, from, to) {
-      $slide = $.deck("getSlide", to);
-      var $console = $slide.find(".pyconsole");
-      if ($console.length) {
-        $("#console").appendTo($console).show();
-        window.jqconsole.Reset();
-        window.jqconsole.BeginPromptLoop();
-        window.jqconsole.Focus();
-      } else {
-        $("#console").hide();
-      }
-      updateRunTimer();
-    });
-    function updateRunTimer() {
-      // Clear previous status, if any.
-      var $runTimer = $(".run-timer");
-      $runTimer.removeClass("run-timer-slow-down")
-               .removeClass("run-timer-on-track")
-               .removeClass("run-timer-move-on")
-               .removeClass("run-timer-hurry-up")
-      // Find the nearest slide with min/max runtime set.
-      if (!$slide || !$slide.length) return;
-      var curpos = 0;
-      while (curpos < $allSlides.length) {
-        if ($allSlides[curpos] == $slide[0]) {
-          break;
-        }
-        curpos++;
-      }
-      var i = curpos - 1;
-      var runTimeMin = $slide.attr("run-time-min");
-      while (!runTimeMin && i >= 0) {
-        runTimeMin = $allSlides.eq(i).attr("run-time-min");
-        i--;
-      }
-      i = curpos - 1;
-      var runTimeMax = $slide.attr("run-time-max");
-      while (!runTimeMax && i >= 0) {
-        runTimeMax = $allSlides.eq(i).attr("run-time-max");
-        i--;
-      }
-      // Tweak status of runtime tracker accordingly.
-      if($slide[0] != $allSlides[0]) {
-        if(talkStartTime == null) {
-          talkStartTime = Math.round((new Date()).getTime() / 1000);
-        }
-        var runTime = Math.round((new Date()).getTime() / 1000) - talkStartTime;
-        console.log("runtime", runTime, runTimeMin, runTimeMax);
-        if (runTimeMin && runTime < parseInt(runTimeMin, 10)|0) {
-          $runTimer.addClass("run-timer-slow-down")
-          console.log("slow down");
-        } else if (runTimeMax && runTime >= parseInt(runTimeMax, 10)|0) {
-          $runTimer.addClass("run-timer-hurry-up")
-          console.log("hurry up");
-        } else if (runTimeMax && runTime >= (parseInt(runTimeMax, 10)|0) - 30) {
-          console.log("move on");
-          $runTimer.addClass("run-timer-move-on")
-        } else {
-          console.log("on track");
-          $runTimer.addClass("run-timer-on-track")
-        }
-      }
-    }
-    setInterval(updateRunTimer, 5*1000);
-  });
+import js
+import time
+
+jq = js.globals["$"]
+
+slide = None
+allSlides = jq(".slide")
+talkStartTime = None
+
+
+@js.Function
+def onDeckChange(event, frm, to):
+    global slide
+    slide = jq.deck("getSlide", to)
+    console = slide.find(".pyconsole")
+    if console.length > 0:
+        jq("#console").appendTo(console).show()
+        js.globals.jqconsole.Reset()
+        js.globals.jqconsole.BeginPromptLoop()
+        js.globals.jqconsole.Focus()
+    else:
+        jq("#console").hide()
+        jq(js.globals.document).click()
+    updateRunTimer()
+
+
+@js.Function
+def updateRunTimer():
+    global talkStartTime
+    # Clear previous status, if any.
+    runTimer = jq(".run-timer")
+    runTimer.removeClass("run-timer-slow-down")
+    runTimer.removeClass("run-timer-on-track")
+    runTimer.removeClass("run-timer-move-on")
+    runTimer.removeClass("run-timer-hurry-up")
+    # Find the nearest slide with min/max runtime set.
+    if slide is None or not slide.length:
+        return
+    curpos = 0
+    while curpos < allSlides.length:
+        if allSlides[str(curpos)] == slide["0"]:
+            break
+        curpos += 1
+    i = curpos - 1
+    runTimeMin = slide.attr("run-time-min")
+    while runTimeMin == js.undefined and i >= 0:
+        runTimeMin = allSlides.eq(i).attr("run-time-min")
+        i -= 1
+    i = curpos - 1
+    runTimeMax = slide.attr("run-time-max")
+    while runTimeMax == js.undefined and i >= 0:
+        runTimeMax = allSlides.eq(i).attr("run-time-max")
+        i -= 1
+    # Tweak status of runtime tracker accordingly.
+    if slide["0"] != allSlides["0"]:
+        if talkStartTime is None:
+            talkStartTime = int(time.time())
+        runTime = int(time.time()) - talkStartTime;
+        runTimeMin = int(runTimeMin) if runTimeMin else 0
+        runTimeMax = int(runTimeMax) if runTimeMax else 0
+        if runTimeMin and runTime < runTimeMin:
+            runTimer.addClass("run-timer-slow-down")
+        elif runTimeMax and runTime >= runTimeMax:
+            runTimer.addClass("run-timer-hurry-up")
+        elif runTimeMax and runTime >= runTimeMax - 30:
+            runTimer.addClass("run-timer-move-on")
+        else:
+            runTimer.addClass("run-timer-on-track")
+
+
+jq(js.globals.document).bind("deck.change", onDeckChange)
+
+js.globals.setInterval(updateRunTimer, 5 * 1000)
+
 </script>
 
 <div id="console" style="display: hidden"></div>
@@ -864,6 +863,21 @@
           $("#console").hide();
         });
       });
+    });
+  });
+</script>
+
+<script>
+  $(function() {
+    $.deck('.slide');
+    // Bootstrap any python script tags.
+    $('script').each(function(i, elem) {
+      var $elem = $(elem);
+      if ($elem.attr('type') === 'text/python') {
+        vm.ready.then(function() {
+          vm.eval($elem.text())
+        });
+      }
     });
   });
 </script>
