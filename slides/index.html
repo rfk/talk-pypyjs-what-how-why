@@ -124,7 +124,7 @@
       font-weight: normal;
   }
   .jqconsole-output {
-      color: #666;
+      color: #444;
   }
   </style>
 
@@ -134,7 +134,7 @@
 
   <div class="run-timer"></div>
 
-  <section class="slide" style="text-align: center" run-time-min="0" run-time-max="240">
+  <section class="slide" style="text-align: center" run-time-waypoint="0">
   <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   <p>Ryan Kelly<br />ryan@rfk.id.au</br>@rfkelly</p>
   </section>
@@ -181,6 +181,31 @@
   </section>
 
   <section class="slide">
+  <h2>The Web</h2>
+  <table style="border: none; width: 100%">
+  <tr><td style="width: 30%">
+  </td><td style="text-align: left;">
+    <p><b>Cons:</b></p>
+    <ul>
+      <li>HTTP</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+  </td><td style="width: 30%">
+  </td><td style="text-align: left;">
+    <p><b>Pros:</b></p>
+    <ul>
+      <li>Open</li>
+      <li>Ubiquitous</li>
+      <li>Secure</li>
+      <li>Trustworthy</li>
+    </ul>
+  </td><td style="width: 30%"> </td></tr>
+  </table>
+  </section>
+
+  <section class="slide">
   <h1>The Web is worth<br/>Keeping</h1>
   </section>
 
@@ -192,7 +217,7 @@
   <h1>The Web is worth<br/>Saving</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="120">
   <h2>Andreas Gal, Mozilla CTO:</h2>
   <blockquote>"For Mozilla, anything that the Web can’t do, or anything that the Web is not faster and better at than native technologies, is a bug."</blockquote>
   <p style="text-align: center;" class="slide"><a href="https://bugzilla.mozilla.org/">https://bugzilla.mozilla.org/</a></p>
@@ -238,7 +263,7 @@
   <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   </section>
 
-  <section class="slide" run-time-min="240" run-time-max="600">
+  <section class="slide" run-time-waypoint="240">
   <h1>What?</h1>
   </section>
 
@@ -275,12 +300,12 @@
   </div>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="300">
   <h2>PyPy.js is ... Compliant</h2>
   <div class="pyconsole"></div>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="360">
   <h2>PyPy.js is ... Fast</h2>
   <div class="pyconsole"></div>
   </section>
@@ -321,7 +346,7 @@
   </table>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="480">
   <h2>PyPy.js is ... In-Browser</h2>
   <pre>
     var vm = new PyPyJS();
@@ -374,7 +399,7 @@
   <div class="pyconsole"></div>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="600">
   <h2>PyPy.js is ...</h2>
   <div style="text-align: center">
   <blockquote>"An experiment in building a fast, compliant, in-browser python environment"</blockquote>
@@ -392,8 +417,8 @@
   <div style="text-align: center">
   <table style="display: inline">
   <tr><th></th><th>Raw</th><th>GZip</th></tr>
-  <tr><td>pypy.vm.js</td><td>15M</td><td>2M</td></tr>
-  <tr><td>pypy.vm.js.mem</td><td>5.5M</td><td>1.4M</td></tr>
+  <tr><td>pypy.vm.js</td><td>15 MB</td><td>2 MB</td></tr>
+  <tr><td>pypy.vm.js.mem</td><td>5.5 MB</td><td>1.4 MB</td></tr>
   </table>
   </div>
   </section>
@@ -406,7 +431,7 @@
   </div>
   </section>
 
-  <section class="slide" run-time-min="600" run-time-max="960">
+  <section class="slide" run-time-waypoint="660">
   <h1>How?</h1>
   </section>
 
@@ -478,7 +503,7 @@
   <h1>Emscripten</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="780">
   <h2>Emscripten:</h2>
   <ul>
   <li>An LLVM backend that generates JavaScript</li>
@@ -519,7 +544,7 @@
   <h1>asm.js</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="900">
   <h2>asm.js</h2>
   <blockquote>"An extraordinarily optimizable, low-level subset of JavaScript"</blockquote>
   <p>&nbsp;</p>
@@ -550,7 +575,7 @@
   </pre>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="960">
   <h2>PyPy.js: How?</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_0.svg" />
@@ -635,7 +660,7 @@
   <h1>It's awful<br/>all the way down</h1>
   </section>
 
-  <section class="slide" run-time-min="960" run-time-max="1200">
+  <section class="slide" run-time-waypoint="1080">
   <h1>Why?</h1>
   </section>
 
@@ -707,7 +732,6 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: Why?</h2>
   <br/>
   <h1>Free Stuff!</h1>
   </section>
@@ -716,7 +740,7 @@
   <h1>Please, file bugs<br/>against the Web</h1>
   </section>
 
-  <section class="slide" run-time-min="1200" run-time-max="1400">
+  <section class="slide" run-time-waypoint="1260">
   <h1>Who?</h1>
   </section>
 
@@ -739,7 +763,7 @@
   <h1>You.<br/>Tomorrow.<br/>At the Sprints.</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="1400">
   <div style="text-align: center">
     <p>ryan@rfk.id.au</p>
     <p>@rfkelly</p>
@@ -795,15 +819,15 @@ def updateRunTimer():
             break
         curpos += 1
     i = curpos - 1
-    runTimeMin = slide.attr("run-time-min")
+    runTimeMin = slide.attr("run-time-waypoint")
     while runTimeMin == js.undefined and i >= 0:
-        runTimeMin = allSlides.eq(i).attr("run-time-min")
+        runTimeMin = allSlides.eq(i).attr("run-time-waypoint")
         i -= 1
-    i = curpos - 1
-    runTimeMax = slide.attr("run-time-max")
-    while runTimeMax == js.undefined and i >= 0:
-        runTimeMax = allSlides.eq(i).attr("run-time-max")
-        i -= 1
+    runTimeMax = js.undefined
+    i = curpos + 1
+    while runTimeMax == js.undefined and i < allSlides.length:
+        runTimeMax = allSlides.eq(i).attr("run-time-waypoint")
+        i += 1
     # Tweak status of runtime tracker accordingly.
     if slide["0"] != allSlides["0"]:
         if talkStartTime is None:
