@@ -52,6 +52,10 @@
   .deck-container .slide td + td {
     text-align: right;
   }
+  .deck-container .slide .pypy-speed {
+    text-align: center;
+    width: 70%;
+  }
   .deck-container .slide .pypy-flow {
     text-align: center;
     width: 60%;
@@ -276,15 +280,27 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js is ... Fast (Enough)</h2>
   <div style="text-align: center">
-  <table style="display: inline">
-  <tr><th></th><th>Cold</th><th>Warm</th></tr>
-  <tr><td>cpython</td><td>80 kps</td><td>80 kps</td></tr>
-  <tr><td>pypy.js, firefox</td><td>40 kps</td><td>150 kps</td></tr>
-  <tr><td>pypy.js, chrome</td><td>10 kps</td><td>220 kps</td></tr>
-  <tr><td>pypy</td><td>700 kps</td><td>2500 kps</td></tr>
-  </table>
+  <img class="pypy-speed" src="./img/speed/pystone-cpy-ff.png" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="pypy-speed" src="./img/speed/pystone-cpy-ff-chrome.png" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="pypy-speed" src="./img/speed/pystone-cpy-ff-chrome-ff2.png" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="pypy-speed" src="./img/speed/pystone-cpy-ff-chrome-ff2-pypy.png" />
+  </div>
   </section>
 
   <section class="slide" run-time-waypoint="510">
@@ -439,23 +455,22 @@
   <section class="slide">
   <br />
   <pre style="font-size: 0.8em;">
-        function DiagModule(stdlib) {
+        function SqrtModule(stdlib, foreign, heap) {
 
             "use asm";
 
             var sqrt = stdlib.Math.sqrt;
 
-            function square(x) {
-                x = +x;
-                return +(x*x);
+            var HEAPF64 = new stdlib.Float64Array(heap);
+
+            function sqrt_ptr(addr) {
+                addr = addr|0;
+                var x = 0.0;
+                x = +HEAPF64[addr >> 3];
+                HEAPF64[addr >> 3] = +sqrt(x);
             }
 
-            function diag(x, y) {
-                x = +x; y = +y;
-                return +sqrt(+square(x) + +square(y));
-            }
-
-            return { diag: diag };
+            return { sqrt_ptr: sqrt_ptr };
         }
   </pre>
   </section>
@@ -591,7 +606,7 @@
   </section>
 
   <section class="slide">
-  <h1>IPython Notebook</h1>
+  <h1>IPython</h1>
   </section>
 
   <section class="slide">
