@@ -136,6 +136,9 @@ function PyPyJS(opts) {
           initializedReject(err);
         }
       }
+      if(!memoryInitializer) {
+        dependenciesFulfilled();
+      }
   
       return initializedP.then((function() {
         // Continue with processing the downloaded module metadata.
@@ -146,6 +149,7 @@ function PyPyJS(opts) {
           this._allModules = modIndex.modules;
           if (modIndex.eager) {
             for (var name in modIndex.eager) {
+              console.log("loading eager module: " + name);
               this._writeModuleFile(name, modIndex.eager[name]);
             }
           }
@@ -424,6 +428,7 @@ PyPyJS.prototype._writeModuleFile = function _writeModuleFile(name, data) {
   } catch (e) { }
   // Now we can safely create the file.
   var fullpath = "/lib/pypyjs/lib_pypy/" + file;
+  console.log("  created file", fullpath)
   Module.FS_createDataFile(fullpath, "", data, true, false, true);
   this._loadedModules[name] = true;
 }

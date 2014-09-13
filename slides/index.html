@@ -23,7 +23,7 @@
     overflow: hidden;
   }
   .deck-container .slide {
-    font-size: 1.5em;
+    font-size: 1.3em;
     padding: 1em;
     padding-top: 0.6em;
     border: none;
@@ -54,7 +54,8 @@
   }
   .deck-container .slide .pypy-speed {
     text-align: center;
-    width: 70%;
+    margin-top: 1.5em;
+    width: 60%;
   }
   .deck-container .slide .pypy-flow {
     text-align: center;
@@ -130,6 +131,9 @@
   .jqconsole-output {
       color: #444;
   }
+.deck-container > .slide {
+  page-break-after: always;
+}
   </style>
 
 </head>
@@ -718,7 +722,7 @@ js.globals.setInterval(updateRunTimer, 5 * 1000)
       vm.stdout('Welcome to PyPy.js!\n')
       // Create an 'InteractiveConsole' to simulate the python shell.
       vm.eval('import code').then(function() {
-        vm.eval('c = code.InteractiveConsole()').then(function() {
+        vm.eval('c = code.InteractiveConsole()\nc.push("import os")\nc.push("from binascii import hexlify")').then(function() {
           // Prompt for input, send it to the console, rinse, repeat.
           jqconsole.BeginPromptLoop = function () {
             jqconsole.Prompt(true, function (input) {
@@ -748,6 +752,11 @@ js.globals.setInterval(updateRunTimer, 5 * 1000)
 <script>
   $(function() {
     $.deck('.slide');
+    // Preload all images to reduce display jank
+    $('img').each(function(i, elem) {
+      var img = new Image();
+      img.src = $(elem).attr('src');
+    });
     // Bootstrap any python script tags.
     $('script').each(function(i, elem) {
       var $elem = $(elem);
