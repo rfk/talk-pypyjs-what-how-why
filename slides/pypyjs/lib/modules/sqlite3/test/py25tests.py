@@ -1,7 +1,7 @@
-#-*- coding: ISO-8859-1 -*-
+#-*- coding: utf-8 -*-
 # pysqlite2/test/regression.py: pysqlite regression tests
 #
-# Copyright (C) 2007 Gerhard Häring <gh@ghaering.de>
+# Copyright (C) 2007 Gerhard HÃ¤ring <gh@ghaering.de>
 #
 # This file is part of pysqlite.
 #

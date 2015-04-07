@@ -15,6 +15,8 @@
 
   <script src="pypyjs/lib/Promise.min.js"></script>
   <script src="pypyjs/lib/pypy.js"></script>
+  <script src="pypyjs/lib-py3k/py3k.js"></script>
+  <script src="pypyjs/lib-pyrolog/pyrolog.js"></script>
   <script src="pypyjs/jquery-migrate-1.2.1.min.js"></script>
   <script src="pypyjs/jqconsole.min.js"></script>
 
@@ -629,6 +631,21 @@
   </section>
 
   <section class="slide">
+  <h2>python2</h2>
+  <div class="pyconsole"></div>
+  </section>
+
+  <section class="slide">
+  <h2>python3</h2>
+  <div class="py3kconsole"></div>
+  </section>
+
+  <section class="slide">
+  <h2>pyrolog</h2>
+  <div class="prconsole"></div>
+  </section>
+
+  <section class="slide">
   <h1>Please, file bugs<br/>against the Web</h1>
   </section>
 
@@ -658,12 +675,19 @@ talkStartTime = None
 def onDeckChange(event, frm, to):
     global slide
     slide = jq.deck("getSlide", to)
-    console = slide.find(".pyconsole")
-    if console.length > 0:
-        jq("#console").appendTo(console).show()
-        js.globals.jqconsole.Reset()
-        js.globals.jqconsole.BeginPromptLoop()
-        js.globals.jqconsole.Focus()
+    # Display appropriate VM console for the new slide.
+    py_console = slide.find(".pyconsole")
+    py3k_console = slide.find(".py3kconsole")
+    pr_console = slide.find(".prconsole")
+    if py_console.length > 0:
+        jq("#console").appendTo(py_console).show()
+        js.globals.jqconsole.ActivateVM(js.globals.vms.pypy)
+    elif py3k_console.length > 0:
+        jq("#console").appendTo(py3k_console).show()
+        js.globals.jqconsole.ActivateVM(js.globals.vms.py3k)
+    elif pr_console.length > 0:
+        jq("#console").appendTo(pr_console).show()
+        js.globals.jqconsole.ActivateVM(js.globals.vms.pyrolog)
     else:
         jq("#console").hide()
         jq(js.globals.document).click()
@@ -723,40 +747,101 @@ js.globals.setInterval(updateRunTimer, 5 * 1000)
 <div id="console" style="display: hidden"></div>
 <script>
   $(function () {
+    window.vms = {};
     window.jqconsole = $('#console').jqconsole('', '>>> ');
-    window.vm = new PyPyJS();
-    vm.stdout = vm.stderr = function(data) {
+    window.stdout = window.stderr = function(data) {
       jqconsole.Write(data, 'jqconsole-output');
     }
-    vm.ready.then(function() {
+    window.devnull = function(data) { };
+    jqconsole.Reset();
+    jqconsole.CurrentlyActiveVM = null;
+    jqconsole.ActivateVM = function(vm) {
+      console.log("ACTIVATE", vm);
+      if (jqconsole.CurrentlyActiveVM) {
+        jqconsole.CurrentlyActiveVM.stdout = window.devnull;
+        jqconsole.CurrentlyActiveVM.stderr = window.devnull;
+      }
+      if (vm) {
+        vm.stdout = window.stdout;
+        vm.stderr = window.stderr;
+      }
+      jqconsole.CurrentlyActiveVM = vm;
+      jqconsole.SetPromptLabel(vm.defaultPromptLabel);
       jqconsole.Reset();
-      vm.stdout('Welcome to PyPy.js!\n')
-      // Create an 'InteractiveConsole' to simulate the python shell.
-      vm.eval('import code').then(function() {
-        vm.eval('c = code.InteractiveConsole()\nc.push("import os")\nc.push("from binascii import hexlify")').then(function() {
-          // Prompt for input, send it to the console, rinse, repeat.
-          jqconsole.BeginPromptLoop = function () {
-            jqconsole.Prompt(true, function (input) {
-              var code = input.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
-              code = 'r = c.push(\'' + code + '\')';
-              vm.eval(code).then(function() {
-                return vm.get('r').then(function(r) {
-                  if (r) {
-                    jqconsole.SetPromptLabel("... ");
-                  } else {
-                    jqconsole.SetPromptLabel(">>> ");
-                  }
-                  setTimeout(jqconsole.BeginPromptLoop, 0);
-                });
-              });
-            });
-          };
-          jqconsole.BeginPromptLoop();
-          // Start hidden.
-          $("#console").hide();
+      vm.ready.then(function() {
+        jqconsole.Focus();
+        jqconsole.DoPromptLoop();
+      });
+    };
+    jqconsole.DoPromptLoop = function () {
+      jqconsole.Prompt(true, function (input) {
+        var vm = jqconsole.CurrentlyActiveVM;
+        vm.pushConsoleInput(input).then(function() {
+          setTimeout(jqconsole.DoPromptLoop, 0);
+        })
+      });
+    };
+    $("#console").hide();
+  });
+</script>
+
+<script>
+  // Our default VM, a vanilla pypy.js shell.
+  $(function () {
+    var vm = window.vms.pypy = new PyPyJS();
+    // Create an 'InteractiveConsole' to simulate the python shell,
+    // and pre-load some things we'll use in the demos.
+    vm.ready.then(function() {
+      var startupCode = 'import code\n' +
+                        'c = code.InteractiveConsole()\n' +
+                        'c.push("import os")\n' +
+                        'c.push("from binascii import hexlify")'
+      return vm.eval(startupCode)
+    });
+    // Make a nice python shell prompt in the console,
+    // including a different prompt for incomplete input.
+    vm.defaultPromptLabel = ">>> ";
+    vm.pushConsoleInput = function(input) {
+      var code = input.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+      code = 'r = c.push(\'' + code + '\')';
+      return vm.eval(code).then(function() {
+        return vm.get('r').then(function(r) {
+          if (r) {
+            window.jqconsole.SetPromptLabel("... ");
+          } else {
+            window.jqconsole.SetPromptLabel(">>> ");
+          }
         });
       });
-    });
+    };
+  });
+</script>
+
+<script>
+  // A pypy.js-on-py3k VM for demo purposes.
+  $(function () {
+    var vm = window.vms.py3k = new Py3KJS();
+    vm.defaultPromptLabel = ">>> ";
+    vm.pushConsoleInput = function(input) {
+      return vm.eval(input)
+    };
+  });
+</script>
+
+<script>
+  // A pyrolog.js VM for demo purposes.
+  $(function () {
+    var vm = window.vms.pyrolog = new PyrologJS();
+    vm.defaultPromptLabel = "?- ";
+    vm.pushConsoleInput = function(input) {
+      return vm.eval(input).then(function(r) {
+        if (r > 0) {
+          window.jqconsole.SetPromptLabel("");
+        } else {
+          window.jqconsole.SetPromptLabel("?- ");
+        }
+      });
+    };
   });
 </script>
 
@@ -772,8 +857,8 @@ js.globals.setInterval(updateRunTimer, 5 * 1000)
     $('script').each(function(i, elem) {
       var $elem = $(elem);
       if ($elem.attr('type') === 'text/python') {
-        vm.ready.then(function() {
-          vm.eval($elem.text())
+        window.vms.pypy.ready.then(function() {
+          window.vms.pypy.eval($elem.text())
         });
       }
     });

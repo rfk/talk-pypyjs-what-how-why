@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 import unittest
 import shlex
 
@@ -72,7 +72,7 @@ foo\ x\x\""|foo|\|x|\|x|\|""|
 foo\ bar|foo|\|bar|
 foo#bar\nbaz|foobaz|
 :-) ;-)|:|-|)|;|-|)|
-αινσϊ|α|ι|ν|σ|ϊ|
+Γ‘Γ©Γ­Γ³ΓΊ|Γ‘|Γ©|Γ­|Γ³|ΓΊ|
 """
 
 posix_data = r"""x|x|
@@ -136,7 +136,7 @@ foo\ x\x\"|foo xx"|
 foo\ bar|foo bar|
 foo#bar\nbaz|foo|baz|
 :-) ;-)|:-)|;-)|
-αινσϊ|αινσϊ|
+Γ‘Γ©Γ­Γ³ΓΊ|Γ‘Γ©Γ­Γ³ΓΊ|
 """
 
 class ShlexTest(unittest.TestCase):

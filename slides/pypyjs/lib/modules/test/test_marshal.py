@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 
 from test import test_support
 import marshal
@@ -90,15 +89,15 @@ class FloatTestCase(unittest.TestCase, HelperMixin):
 
 class StringTestCase(unittest.TestCase, HelperMixin):
     def test_unicode(self):
-        for s in [u"", u"Andrè Previn", u"abc", u" "*10000]:
+        for s in [u"", u"AndrÃ¨ Previn", u"abc", u" "*10000]:
             self.helper(s)
 
     def test_string(self):
-        for s in ["", "Andrè Previn", "abc", " "*10000]:
+        for s in ["", "AndrÃ¨ Previn", "abc", " "*10000]:
             self.helper(s)
 
     def test_buffer(self):
-        for s in ["", "Andrè Previn", "abc", " "*10000]:
+        for s in ["", "AndrÃ¨ Previn", "abc", " "*10000]:
             with test_support.check_py3k_warnings(("buffer.. not supported",
                                                      DeprecationWarning)):
                 b = buffer(s)
@@ -123,7 +122,7 @@ class ContainerTestCase(unittest.TestCase, HelperMixin):
          'alist': ['.zyx.41'],
          'atuple': ('.zyx.41',)*10,
          'aboolean': False,
-         'aunicode': u"Andrè Previn"
+         'aunicode': u"AndrÃ¨ Previn"
          }
     def test_dict(self):
         self.helper(self.d)
@@ -230,7 +229,7 @@ class LargeValuesTestCase(unittest.TestCase):
         self.check_unmarshallable('x' * size)
 
     @test_support.precisionbigmemtest(size=LARGE_SIZE,
-            memuse=character_size, dry_run=False)
+            memuse=character_size + 2, dry_run=False)
     def test_unicode(self, size):
         self.check_unmarshallable(u'x' * size)
 

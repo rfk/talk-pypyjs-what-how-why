@@ -1,7 +1,7 @@
-#-*- coding: iso-8859-1 -*-
+#-*- coding: utf-8 -*-
 # pysqlite2/test/regression.py: pysqlite regression tests
 #
-# Copyright (C) 2006-2007 Gerhard Häring <gh@ghaering.de>
+# Copyright (C) 2006-2007 Gerhard HÃ¤ring <gh@ghaering.de>
 #
 # This file is part of pysqlite.
 #
@@ -334,6 +334,11 @@ class RegressionTests(unittest.TestCase):
             datetime.datetime(2012, 4, 4, 15, 6, 0, 456000),
             datetime.datetime(2012, 4, 4, 15, 6, 0, 123456),
         ])
+
+    def CheckInvalidIsolationLevelType(self):
+        # isolation level is a string, not an integer
+        self.assertRaises(TypeError,
+                          sqlite.connect, ":memory:", isolation_level=123)
 
 
 def suite():

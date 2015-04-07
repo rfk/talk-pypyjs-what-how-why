@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 
 # Note that PyPy contains also a built-in module 'md5' which will hide
 # this one if compiled in.
@@ -33,7 +33,7 @@ Dinu C. Gherman
 
 
 __date__    = '2004-11-17'
-__version__ = 0.91 # Modernised by J. Hallén and L. Creighton for Pypy
+__version__ = 0.91 # Modernised by J. HallÃ©n and L. Creighton for Pypy
 
 __metaclass__ = type # or genrpy won't work
 

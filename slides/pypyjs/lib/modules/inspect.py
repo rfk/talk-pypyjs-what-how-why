@@ -1,4 +1,4 @@
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 """Get useful information from live Python objects.
 
 This module encapsulates the interface provided by the internal special

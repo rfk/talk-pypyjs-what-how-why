@@ -1,4 +1,4 @@
-# -*- coding: koi8-r -*-
+# -*- coding: utf-8 -*-
 
 import unittest
 from test import test_support
@@ -7,11 +7,11 @@ class PEP263Test(unittest.TestCase):
 
     def test_pep263(self):
         self.assertEqual(
-            u"ðÉÔÏÎ".encode("utf-8"),
+            u"ÐŸÐ¸Ñ‚Ð¾Ð½".encode("utf-8"),
             '\xd0\x9f\xd0\xb8\xd1\x82\xd0\xbe\xd0\xbd'
         )
         self.assertEqual(
-            u"\ð".encode("utf-8"),
+            u"\ÐŸ".encode("utf-8"),
             '\\\xd0\x9f'
         )
 
@@ -57,6 +57,11 @@ class PEP263Test(unittest.TestCase):
             compile('\xef\xbb\xbf# -*- coding: fake -*-\n', 'dummy', 'exec')
         with self.assertRaisesRegexp(SyntaxError, 'BOM'):
             compile('\xef\xbb\xbf# -*- coding: fake -*-\n', 'dummy', 'exec')
+
+    def test_non_unicode_codec(self):
+        with self.assertRaisesRegexp(SyntaxError,
+                                     'codec did not return a unicode'):
+            from test import bad_coding3
 
 
 def test_main():

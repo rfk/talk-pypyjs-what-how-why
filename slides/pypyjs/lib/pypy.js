@@ -2,10 +2,86 @@
 //  PyPyJS:  an experimental in-browser python environment.
 //
 
-(function(exports) {
+(function() {
 
-exports.PyPyJS = PyPyJS;
+// Expose the main PyPyJS function at global scope for this file,
+// as well as in any module exports or 'window' object we can find.
+if (this) {
+  this.PyPyJS = PyPyJS;
+}
+if (typeof window !== "undefined") {
+  window.PyPyJS = PyPyJS;
+}
+if (typeof module !== "undefined") {
+  if (typeof module.exports !== "undefined") {
+    module.exports = PyPyJS;
+  }
+}
 
+
+// Generic debugging printf.
+var debug = function(){};
+if (typeof console !== "undefined") {
+  debug = console.log;
+} else if (typeof print !== "undefined") {
+  debug = print
+}
+
+
+// Find the directory containing this very file.
+// It can be quite difficult depending on execution environment...
+if (typeof __dirname === "undefined") {
+  var __dirname = "./";
+  // A little hackery to find the URL of this very file.
+  // Throw an error, then parse the stack trace looking for filenames.
+  var errlines = (new Error()).stack.split("\n");
+  for (var i = 0; i < errlines.length; i++) {
+    var match = /(at |@)(.+\/)pypy.js/.exec(errlines[i]);
+    if (match) {
+      __dirname = match[2];
+      break;
+    }
+  }
+}
+if (__dirname.charAt(__dirname.length - 1) !== "/") {
+  __dirname += "/";
+} 
+
+
+// Ensure we have reference to a 'Promise' constructor.
+var Promise;
+if (typeof Promise === "undefined") {
+  if (this && typeof this.Promise !== "undefined") {
+    Promise = this.Promise;
+  } else if (typeof require === "function") {
+    Promise = require("./Promise.min.js");
+  } else if (typeof load === "function") {
+    load(__dirname + "Promise.min.js");
+    if (typeof Promise === "undefined") {
+      if (this && typeof this.Promise !== "undefined") {
+        Promise = this.Promise;
+      }
+    }
+  } else if (typeof window !== "undefined") {
+    if (typeof window.Promise !== "undefined") {
+      var Promise = window.Promise;
+    }
+  }
+}
+
+if (typeof Promise === "undefined") {
+  throw "Promise object not found";
+}
+
+// Some extra goodies for nodejs.
+if (typeof require === "function") {
+  var fs = require("fs");
+  var path = require("path");
+}
+
+
+// Main class representing the PyPy VM.
+// This is our primary export and return value.
 function PyPyJS(opts) {
 
   // Default stdin to a closed file.
@@ -14,9 +90,63 @@ function PyPyJS(opts) {
     return null;
   }
 
-  // Default stdout and stderr to /dev/null.
-  // Calling code may override these to handle output.
-  this.stdout = this.stderr = function(x) { }
+  // Default stdout and stderr to process outputs if available, otherwise
+  // to /dev/null. Calling code may override these to handle output.
+  this.stdout = this.stderr = null
+  if (typeof process !== "undefined") {
+    if (typeof process.stdout !== "undefined") {
+      this.stdout = function(x) { process.stdout.write(x); }
+    }
+    if (typeof process.stderr !== "undefined") {
+      this.stderr = function(x) { process.stderr.write(x); }
+    }
+  }
+  if (typeof print !== "undefined") {
+    if (this.stdout === null) {
+      // print() will add a newline, so we buffer until we
+      // receive one and then let it add it for us.
+      this.stdout = (function() {
+        var buffer = [];
+        return function(data) {
+          for (var i = 0; i < data.length; i++) {
+            var x = data.charAt(i);
+            if (x !== "\n") {
+              buffer.push(x);
+            } else {
+              print(buffer.join(""));
+              buffer.splice(undefined, buffer.length);
+            }
+          }
+        }
+      })();
+    }
+  }
+  if (typeof printErr !== "undefined") {
+    if (this.stderr === null) {
+      // printErr() will add a newline, so we buffer until we
+      // receive one and then let it add it for us.
+      this.stderr = (function() {
+        var buffer = [];
+        return function(data) {
+          for (var i = 0; i < data.length; i++) {
+            var x = data.charAt(i);
+            if (x !== "\n") {
+              buffer.push(x);
+            } else {
+              printErr(buffer.join(""));
+              buffer.splice(undefined, buffer.length);
+            }
+          }
+        }
+      })();
+    }
+  }
+  if (this.stdout === null) {
+    this.stdout = function(x) {};
+  }
+  if (this.stderr === null) {
+    this.stderr = this.stdout;
+  }
 
   opts = opts || {};
   this.rootURL = opts.rootURL;
@@ -28,24 +158,16 @@ function PyPyJS(opts) {
 
   // Default to finding files relative to this very file.
   if (!this.rootURL && !PyPyJS.rootURL) {
-    PyPyJS.rootURL = "./";
-    // A little hackery to find the URL of this very file.
-    // Throw an error, then parse the stack trace looking for filenames.
-    var errlines = (new Error()).stack.split("\n");
-    for (var i = 0; i < errlines.length; i++) {
-      var match = /(https?:\/\/.+\/)pypy.js/.exec(errlines[i]);
-      if (match) {
-        PyPyJS.rootURL = match[1];
-        break;
-      }
-    }
+    PyPyJS.rootURL = __dirname;
   }
+  if (this.rootURL && this.rootURL.charAt(this.rootURL.length - 1) !== "/") {
+    this.rootURL += "/";
+  } 
 
   this.ready = new Promise((function(resolve, reject) {
 
     // Fetch the emscripten-compiled asmjs code.
     // We will need to eval() this in a scope with a custom 'Module' object.
-    console.log("fetching asmjs code...");
     this.fetch("pypy.vm.js")
     .then((function(xhr) {
 
@@ -58,13 +180,16 @@ function PyPyJS(opts) {
       Module.thisProgram = "/lib/pypyjs/pypy.js";
       Module.filePackagePrefixURL = this.rootURL || PyPyJS.rootURL;
       Module.memoryInitializerPrefixURL = this.rootURL || PyPyJS.rootURL;
+      Module.locateFile = function(name) {
+        return (this.rootURL || PyPyJS.rootURL) + name;
+      }
 
       // Don't start or stop the program, just set it up.
       // We'll call the API functions ourself.
       Module.noInitialRun = true;
       Module.noExitRuntime = true;
 
-      // Route stdout to an overridable method on the object.
+      // Route stdin to an overridable method on the object.
       var stdin = (function stdin() {
         return this.stdin();
       }).bind(this);
@@ -89,22 +214,28 @@ function PyPyJS(opts) {
       }).bind(this);
  
       // Begin fetching the metadata for available python modules.
-      //  With luck these can download while we jank around compiling
-      //  all of tha javascript.
-      //  XXX TODO: also load memory initialier this way.
+      // With luck these can download while we jank around compiling
+      // all of that javascript.
+      // XXX TODO: also load memory initializer this way.
       var moduleDataP = this.fetch("modules/index.json");
 
       // Eval the code.  This will probably take quite a while in Firefox
       // as it parses and compiles all the functions.  The result is that
       // our "Module" object is populated with all the exported VM functions.
-      console.log("evaluating asmjs code...");
       eval(xhr.responseText);
 
       // Make the module available on this object.
       // We will use its methods to execute code in the VM.
       this._module = Module;
 
-      // And some functions that are not exported by default.
+      // Ensure that some functions are available on the Module,
+      // for linking with jitted code.
+      if (!Module._jitInvoke && typeof _jitInvoke !== "undefined") {
+        Module._jitInvoke = _jitInvoke;
+      }
+
+      // And some functions that are not exported by default, but
+      // which appear in our scope thanks to the above eval().
       this._emjs_make_handle = _emjs_make_handle;
       this._emjs_free = _emjs_free;
 
@@ -118,7 +249,6 @@ function PyPyJS(opts) {
       dependenciesFulfilled = function() {
         // Initialize the VM state.
         try {
-          console.log("initialising the vm...");
           FS.init(stdin, stdout, stderr);
           Module.FS_createPath("/", "lib/pypyjs/lib_pypy", true, false);
           Module.FS_createPath("/", "lib/pypyjs/lib-python/2.7", true, false);
@@ -138,27 +268,25 @@ function PyPyJS(opts) {
       }
       if(!memoryInitializer) {
         dependenciesFulfilled();
+      } else if(!ENVIRONMENT_IS_WEB && !ENVIRONMENT_IS_WORKER) {
+        dependenciesFulfilled();
       }
   
       return initializedP.then((function() {
         // Continue with processing the downloaded module metadata.
         return moduleDataP.then((function(xhr) {
-          console.log("loading module index...");
-          // Store the module index, and load any eager ones.
+          // Store the module index, and load any preload modules.
           var modIndex = JSON.parse(xhr.responseText);
           this._allModules = modIndex.modules;
-          if (modIndex.eager) {
-            for (var name in modIndex.eager) {
-              console.log("loading eager module: " + name);
-              this._writeModuleFile(name, modIndex.eager[name]);
+          if (modIndex.preload) {
+            for (var name in modIndex.preload) {
+              this._writeModuleFile(name, modIndex.preload[name]);
             }
           }
-          console.log("pypy.js is ready!");
         }).bind(this));
       }).bind(this))
     }).bind(this))
-    .then(resolve, function(err){ console.log(err); reject(err)});
-
+    .then(resolve, function(err){ debug("ERROR: " + err); reject(err) });
   }).bind(this));
 
 };
@@ -168,21 +296,52 @@ function PyPyJS(opts) {
 // that treats paths as relative to the pypy.js root url.
 //
 PyPyJS.prototype.fetch = function fetch(relpath, responseType) {
-  return new Promise((function(resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      console.log("loaded", relpath);
-      if (xhr.status >= 400) {
-        reject(xhr)
-      } else {
-        resolve(xhr);
-      }
-    };
-    var rootURL = this.rootURL || PyPyJS.rootURL;
-    xhr.open('GET', rootURL + relpath, true);
-    xhr.responseType = responseType || "string";
-    xhr.send(null);
-  }).bind(this));
+  // For the web, use XMLHttpRequest.
+  if (typeof XMLHttpRequest !== "undefined") {
+    return new Promise((function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function() {
+        if (xhr.status >= 400) {
+          reject(xhr)
+        } else {
+          resolve(xhr);
+        }
+      };
+      var rootURL = this.rootURL || PyPyJS.rootURL;
+      xhr.open('GET', rootURL + relpath, true);
+      xhr.responseType = responseType || "string";
+      xhr.send(null);
+    }).bind(this));
+  }
+  // For nodejs, use fs.readFile.
+  if (typeof fs !== "undefined" && typeof fs.readFile !== "undefined") {
+    return new Promise((function(resolve, reject) {
+      var rootURL = this.rootURL || PyPyJS.rootURL;
+      fs.readFile(path.join(rootURL, relpath), function(err, data) {
+        if (err) return reject(err);
+        resolve({ responseText: data.toString() });
+      });
+    }).bind(this));
+  }
+  // For spidermonkey, use snarf (which has a binary read mode).
+  if (typeof snarf !== "undefined") {
+    return new Promise((function(resolve, reject) {
+      var rootURL = this.rootURL || PyPyJS.rootURL;
+      var data = snarf(rootURL + relpath);
+      resolve({ responseText: data });
+    }).bind(this));
+  }
+  // For d8, use read() and readbuffer().
+  if (typeof read !== "undefined" && typeof readbuffer !== "undefined") {
+    return new Promise((function(resolve, reject) {
+      var rootURL = this.rootURL || PyPyJS.rootURL;
+      var data = read(rootURL + relpath);
+      resolve({ responseText: data });
+    }).bind(this));
+  }
+  return new Promise(function(resolve, reject) {
+    reject("unable to fetch files");
+  });
 };
 
 
@@ -195,32 +354,32 @@ PyPyJS.prototype.fetch = function fetch(relpath, responseType) {
 // XXX TODO: maybe we should throw an error if there's an error?
 //
 PyPyJS.prototype.eval = function eval(code) {
-
-  var Module = this._module
-
-  var p = Promise.resolve();
-  // Find any "import" statements in the code,
-  // and ensure the modules are ready for loading.
-  if (this.autoLoadModules) {
-    p = p.then((function() {
-      return this.findImportedNames(code);
-    }).bind(this))
-    .then((function(imports) {
-      return this.loadModuleData.apply(this, imports);
-    }).bind(this))
-  }
-  // Now we can execute the code using the PyPy embedding API.
-  p = p.then((function() {
-    var code_chars = Module.intArrayFromString(code);
-    var code_ptr = Module.allocate(code_chars, 'i8', Module.ALLOC_NORMAL);
-    if (!code_ptr) {
-      return -1;
+  return this.ready.then((function() {
+    var Module = this._module;
+    var p = Promise.resolve();
+    // Find any "import" statements in the code,
+    // and ensure the modules are ready for loading.
+    if (this.autoLoadModules) {
+      p = p.then((function() {
+        return this.findImportedNames(code);
+      }).bind(this))
+      .then((function(imports) {
+        return this.loadModuleData.apply(this, imports);
+      }).bind(this))
     }
-    var res = Module._pypy_execute_source(code_ptr);
-    Module._free(code_ptr);
-    return res;
+    // Now we can execute the code using the PyPy embedding API.
+    p = p.then((function() {
+      var code_chars = Module.intArrayFromString(code);
+      var code_ptr = Module.allocate(code_chars, 'i8', Module.ALLOC_NORMAL);
+      if (!code_ptr) {
+        return -1;
+      }
+      var res = Module._pypy_execute_source(code_ptr);
+      Module._free(code_ptr);
+      return res;
+    }).bind(this));
+    return p;
   }).bind(this));
-  return p;
 }
 
 
@@ -235,26 +394,28 @@ PyPyJS.prototype.eval = function eval(code) {
 PyPyJS._resultsID = 0;
 PyPyJS._resultsMap = {};
 PyPyJS.prototype.get = function get(name) {
-  var Module = this._module
-  var resid = ""+(PyPyJS._resultsID++);
-  return new Promise((function(resolve, reject) {
-    name = name.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
-    var code = "globals()['" + name + "']";
-    code = "js.convert(" + code + ")"
-    code = "js.globals['PyPyJS']._resultsMap['" + resid + "'] = " + code;
-    var code_chars = Module.intArrayFromString(code);
-    var code_ptr = Module.allocate(code_chars, 'i8', Module.ALLOC_NORMAL);
-    if (!code_ptr) {
-      reject("failed to allocate code string");
-    }
-    var res = Module._pypy_execute_source(code_ptr);
-    Module._free(code_ptr);
-    if (res !== 0) {
-      reject("error executing code");
-    } else {
-      resolve(PyPyJS._resultsMap[resid]);
-      delete PyPyJS._resultsMap[resid];
-    }
+  return this.ready.then((function() {
+    var Module = this._module;
+    var resid = ""+(PyPyJS._resultsID++);
+    return new Promise((function(resolve, reject) {
+      name = name.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+      var code = "globals()['" + name + "']";
+      code = "js.convert(" + code + ")"
+      code = "js.globals['PyPyJS']._resultsMap['" + resid + "'] = " + code;
+      var code_chars = Module.intArrayFromString(code);
+      var code_ptr = Module.allocate(code_chars, 'i8', Module.ALLOC_NORMAL);
+      if (!code_ptr) {
+        reject("failed to allocate code string");
+      }
+      var res = Module._pypy_execute_source(code_ptr);
+      Module._free(code_ptr);
+      if (res !== 0) {
+        reject("error executing code");
+      } else {
+        resolve(PyPyJS._resultsMap[resid]);
+        delete PyPyJS._resultsMap[resid];
+      }
+    }).bind(this));
   }).bind(this));
 }
 
@@ -265,26 +426,27 @@ PyPyJS.prototype.get = function get(name) {
 // python variable to reference it via that handle.
 //
 PyPyJS.prototype.set = function set(name, value) {
-  var Module = this._module
-  return new Promise((function(resolve, reject) {
-    var h = this._emjs_make_handle(value);
-    name = name.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
-    // XXX TODO: need to expose _wrap_handle to python code somehow.
-    var code = "globals()['" + name + "'] = js.Value(" + h + ")";
-    var code_chars = Module.intArrayFromString(code);
-    var code_ptr = Module.allocate(code_chars, 'i8', Module.ALLOC_NORMAL);
-    if (!code_ptr) {
-      this._emjs_free(h);
-      reject("failed to allocate code string");
-    }
-    var res = Module._pypy_execute_source(code_ptr);
-    Module._free(code_ptr);
-    if (res !== 0) {
-      this._emjs_free(h);
-      reject("error executing code");
-    } else {
-      resolve();
-    }
+  return this.ready.then((function() {
+    var Module = this._module;
+    return new Promise((function(resolve, reject) {
+      var h = this._emjs_make_handle(value);
+      name = name.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+      var code = "globals()['" + name + "'] = js.Value(" + h + ")";
+      var code_chars = Module.intArrayFromString(code);
+      var code_ptr = Module.allocate(code_chars, 'i8', Module.ALLOC_NORMAL);
+      if (!code_ptr) {
+        this._emjs_free(h);
+        reject("failed to allocate code string");
+      }
+      var res = Module._pypy_execute_source(code_ptr);
+      Module._free(code_ptr);
+      if (res !== 0) {
+        this._emjs_free(h);
+        reject("error executing code");
+      } else {
+        resolve();
+      }
+    }).bind(this));
   }).bind(this));
 }
 
@@ -428,7 +590,6 @@ PyPyJS.prototype._writeModuleFile = function _writeModuleFile(name, data) {
   } catch (e) { }
   // Now we can safely create the file.
   var fullpath = "/lib/pypyjs/lib_pypy/" + file;
-  console.log("  created file", fullpath)
   Module.FS_createDataFile(fullpath, "", data, true, false, true);
   this._loadedModules[name] = true;
 }
@@ -436,4 +597,6 @@ PyPyJS.prototype._writeModuleFile = function _writeModuleFile(name, data) {
 
 // XXX TODO: expose the filesystem for manipulation by calling code.
 
-})(window);
+return PyPyJS;
+
+})();
