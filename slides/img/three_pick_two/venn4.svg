@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="21cm" height="15cm" viewBox="68 29 409 297" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <rect style="fill: none; fill-opacity:0; stroke-width: 2.35099e-37; stroke: #000000" x="68" y="29" width="408" height="297"/>
+  <g>
+    <ellipse style="fill: #ffffff" cx="234.85" cy="185.05" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="234.85" cy="185.05" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="234.85" cy="185.05" rx="63.25" ry="63.25"/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="304.05" cy="183.15" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="304.05" cy="183.15" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="304.05" cy="183.15" rx="63.25" ry="63.25"/>
+  </g>
+  <g>
+    <ellipse style="fill: #ffffff" cx="273.05" cy="124.15" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="273.05" cy="124.15" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="273.05" cy="124.15" rx="63.25" ry="63.25"/>
+  </g>
+  <g>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="235.05" cy="184.35" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="235.05" cy="184.35" rx="63.25" ry="63.25"/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="419" y="374">
+    <tspan x="419" y="374"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="704" y="388">
+    <tspan x="704" y="388"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="372.15" y="390.3">
+    <tspan x="372.15" y="390.3"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="652.15" y="389.3">
+    <tspan x="652.15" y="389.3"></tspan>
+  </text>
+  <text font-size="16.9333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="183.5" y="262.5">
+    <tspan x="183.5" y="262.5">performance</tspan>
+  </text>
+  <g>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="272.25" cy="124.25" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="272.25" cy="124.25" rx="63.25" ry="63.25"/>
+  </g>
+  <g>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="303.85" cy="182.45" rx="63.25" ry="63.25"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="303.85" cy="182.45" rx="63.25" ry="63.25"/>
+  </g>
+  <text font-size="16.9333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="357.8" y="263">
+    <tspan x="357.8" y="263">compatibility</tspan>
+  </text>
+  <text font-size="16.9333" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="273.8" y="57">
+    <tspan x="273.8" y="57">web-ish-ness</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="268.8" y="296">
+    <tspan x="268.8" y="296">CPython</tspan>
+    <tspan x="268.8" y="312">PyPy</tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="126.8" y="66">
+    <tspan x="126.8" y="66"></tspan>
+    <tspan x="126.8" y="82">PyJS</tspan>
+    <tspan x="126.8" y="98">Rusthon</tspan>
+    <tspan x="126.8" y="114">Pythonium</tspan>
+    <tspan x="126.8" y="130"></tspan>
+  </text>
+  <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="417.8" y="85">
+    <tspan x="417.8" y="85">Skulpt</tspan>
+    <tspan x="417.8" y="101">Brython</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="165" y1="96" x2="222.956" y2="135.515"/>
+    <polygon style="fill: #000000" points="229.152,139.74 218.074,138.238 222.956,135.515 223.707,129.976 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="229.152,139.74 218.074,138.238 222.956,135.515 223.707,129.976 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="384" y1="91" x2="314.261" y2="138.045"/>
+    <polygon style="fill: #000000" points="308.044,142.239 313.538,132.502 314.261,138.045 319.13,140.792 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="308.044,142.239 313.538,132.502 314.261,138.045 319.13,140.792 "/>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:700" x="267.8" y="166">
+    <tspan x="267.8" y="166">???</tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="270" y1="279" x2="269.3" y2="217.225"/>
+    <polygon style="fill: #000000" points="269.215,209.726 274.328,219.669 269.3,217.225 264.329,219.782 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="269.215,209.726 274.328,219.669 269.3,217.225 264.329,219.782 "/>
+  </g>
+</svg>

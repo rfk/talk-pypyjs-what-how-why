@@ -59,6 +59,11 @@
     margin-top: 1.5em;
     width: 60%;
   }
+  .deck-container .slide .venn-diagram {
+    text-align: center;
+    margin-top: 1.5em;
+    width: 70%;
+  }
   .deck-container .slide .pypy-flow {
     text-align: center;
     width: 60%;
@@ -248,7 +253,7 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js is ... Not the First</h2>
+  <h2>Not the First:</h2>
   <div style="text-align: center">
   <table style="width: 90%; display: inline"><tr><td>
     <ul>
@@ -256,10 +261,12 @@
     <li>Skulpt</li>
     <li>Brython</li>
     <li>PythonJS</li>
+    <li>Rusthon</li>
+    <li>RapydScript</li>
     </ul>
   </td><td style="width: 10%"></td><td style="text-align: left">
     <ul>
-    <li>RapydScript</li>
+    <li>Pythonium</li>
     <li>Pystachio</li>
     <li>Pyjaco</li>
     <li>...?</li>
@@ -268,99 +275,48 @@
   </div>
   </section>
 
-  <section class="slide">
-  <h2>PyPy.js is ... An Experiment</h2>
-  <div style="text-align: center">
-  <img src="./img/no-idea-what-im-doing.jpg" style="width: 60%" />
-  </div>
-  </section>
-
   <section class="slide" run-time-waypoint="240">
-  <h2>PyPy.js is ... Compliant</h2>
+  <h2>Compatibility</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide" run-time-waypoint="300">
-  <h2>PyPy.js is ... Fast</h2>
+  <h2>Speed</h2>
   <div class="pyconsole"></div>
-  </section>
-
-  <section class="slide">
-  <div style="text-align: center">
-  <img class="pypy-speed" src="./img/speed/pystone-cpy-ff.png" />
-  </div>
-  </section>
-
-  <section class="slide">
-  <div style="text-align: center">
-  <img class="pypy-speed" src="./img/speed/pystone-cpy-ff-chrome.png" />
-  </div>
-  </section>
-
-  <section class="slide">
-  <div style="text-align: center">
-  <img class="pypy-speed" src="./img/speed/pystone-cpy-ff-chrome-ff2.png" />
-  </div>
-  </section>
-
-  <section class="slide">
-  <div style="text-align: center">
-  <img class="pypy-speed" src="./img/speed/pystone-cpy-ff-chrome-ff2-pypy.png" />
-  </div>
   </section>
 
   <section class="slide" run-time-waypoint="510">
-  <h2>PyPy.js is ... In-Browser</h2>
-  <pre>
-    var vm = new PyPyJS();
-
-    vm.ready.then(function(){ ... })
-
-    vm.set("x", 12).then(...)
-
-    vm.eval("x = x + 1").then(...)
-
-    vm.get("x").then(...)
-  </pre>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js is ... In-Browser</h2>
-  <div class="pyconsole"></div>
-  </section>
-
-  <section class="slide" run-time-waypoint="690">
-  <h2>PyPy.js is ...</h2>
-  <div style="text-align: center">
-  <blockquote>"An experiment in building a fast, compliant, in-browser python environment"</blockquote>
-  <p class="slide">But...<p>
-  </div>
-  </section>
-
-  <section class="slide">
-  <h2>PyPy.js is ... Not so Fast</h2>
+  <h2>Web-ish-ness</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js is ... Humongous</h2>
   <div style="text-align: center">
-  <table style="display: inline">
-  <tr><th></th><th>Raw</th><th>GZip</th></tr>
-  <tr><td>pypy.vm.js</td><td>15 MB</td><td>2 MB</td></tr>
-  <tr><td>pypy.vm.js.mem</td><td>5.5 MB</td><td>1.4 MB</td></tr>
-  </table>
+  <img class="venn-diagram" src="./img/three_pick_two/venn0.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js is ... Humongous</h2>
   <div style="text-align: center">
-  <table style="display: inline">
-  <tr><th></th><th>Raw</th><th>GZip</th></tr>
-  <tr><td>pypy.vm.js</td><td>14 MB</td><td>1.8 MB</td></tr>
-  <tr><td>pypy.vm.js.mem</td><td>5.5 MB</td><td>1.4 MB</td></tr>
-  </table>
+  <img class="venn-diagram" src="./img/three_pick_two/venn1.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="venn-diagram" src="./img/three_pick_two/venn2.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="venn-diagram" src="./img/three_pick_two/venn3.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="venn-diagram" src="./img/three_pick_two/venn4.svg" />
   </div>
   </section>
 
@@ -369,7 +325,8 @@
   </section>
 
   <section class="slide">
-  <h1>PyPy</h1>
+  <h1>PyPy.js = <br/>
+  PyPy + Emscripten</h1>
   </section>
 
   <section class="slide">
@@ -423,10 +380,6 @@
   </div>
   </section>
 
-  <section class="slide">
-  <h1>Emscripten</h1>
-  </section>
-
   <section class="slide" run-time-waypoint="960">
   <h2>Emscripten:</h2>
   <ul>
@@ -469,80 +422,57 @@
   <blockquote>"An extraordinarily optimizable, low-level subset of JavaScript"</blockquote>
   </section>
 
-  <section class="slide">
-  <br />
-  <pre style="font-size: 0.8em;">
-        function SqrtModule(stdlib, foreign, heap) {
-
-            "use asm";
-
-            var sqrt = stdlib.Math.sqrt;
-
-            var HEAPF64 = new stdlib.Float64Array(heap);
-
-            function sqrt_ptr(addr) {
-                addr = addr|0;
-                var x = 0.0;
-                x = +HEAPF64[addr >> 3];
-                HEAPF64[addr >> 3] = +sqrt(x);
-            }
-
-            return { sqrt_ptr: sqrt_ptr };
-        }
-  </pre>
-  </section>
-
   <section class="slide" run-time-waypoint="1110">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_0.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_1.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_2.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_3.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_4.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_5.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_6.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_7.svg" />
   </div>
@@ -553,14 +483,14 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_7.svg" />
   </div>
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: How?</h2>
+  <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_9.svg" />
   </div>
@@ -568,6 +498,30 @@
 
   <section class="slide">
   <h1>It's awful<br/>all the way down</h1>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <h1><a href="http://arewepythonyet.com/" target="_new">arewepythonyet.com</a></h1>
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="venn-diagram" src="./img/three_pick_two/venn4.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="venn-diagram" src="./img/three_pick_two/venn5.svg" />
+  </div>
+  </section>
+
+  <section class="slide">
+  <div style="text-align: center">
+  <img class="venn-diagram" src="./img/three_pick_two/venn6.svg" />
+  </div>
   </section>
 
   <section class="slide" run-time-waypoint="1200">
@@ -631,18 +585,24 @@
   </section>
 
   <section class="slide">
-  <h2>python2</h2>
   <div class="pyconsole"></div>
+  <div style="text-align: center;">
+  <p><a href="https://bitbucket.org/pypy/pypy">https://bitbucket.org/pypy/pypy/</a></p>
+  </div>
   </section>
 
   <section class="slide">
-  <h2>python3</h2>
   <div class="py3kconsole"></div>
+  <div style="text-align: center;">
+  <p><a href="https://bitbucket.org/pypy/pypy/branch/py3k">https://bitbucket.org/pypy/pypy/branch/py3k</a></p>
+  </div>
   </section>
 
   <section class="slide">
-  <h2>pyrolog</h2>
   <div class="prconsole"></div>
+  <div style="text-align: center;">
+  <p><a href="https://bitbucket.org/cfbolz/pyrolog/">https://bitbucket.org/cfbolz/pyrolog/</a></p>
+  </div>
   </section>
 
   <section class="slide">
@@ -651,11 +611,11 @@
 
   <section class="slide" run-time-waypoint="1300">
   <div style="text-align: center">
-    <p>ryan@rfk.id.au</p>
-    <p>@rfkelly</p>
     <br/>
     <p>http://pypyjs.org/</p>
-    <p>http://github.com/rfk/talk-pypyjs-what-how-why</p>
+    <br/>
+    <p>ryan@rfk.id.au</p>
+    <p>@rfkelly</p>
   </div>
   </section>
 
@@ -756,7 +716,6 @@ js.globals.setInterval(updateRunTimer, 5 * 1000)
     jqconsole.Reset();
     jqconsole.CurrentlyActiveVM = null;
     jqconsole.ActivateVM = function(vm) {
-      console.log("ACTIVATE", vm);
       if (jqconsole.CurrentlyActiveVM) {
         jqconsole.CurrentlyActiveVM.stdout = window.devnull;
         jqconsole.CurrentlyActiveVM.stderr = window.devnull;
