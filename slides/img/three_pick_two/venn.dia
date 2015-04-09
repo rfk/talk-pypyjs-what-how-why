@@ -65,19 +65,19 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="Standard - Box" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="3.4,1.45"/>
+        <dia:point val="3.4,1.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.4,1.45;23.8,16.3"/>
+        <dia:rectangle val="3.4,1.1;23.8,16.6"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="3.4,1.45"/>
+        <dia:point val="3.4,1.1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.400000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.850000000000001"/>
+        <dia:real val="15.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="border_width">
         <dia:real val="1.1754943508222875e-38"/>
@@ -400,10 +400,10 @@
     </dia:object>
     <dia:object type="Standard - Text" version="1" id="O9">
       <dia:attribute name="obj_pos">
-        <dia:point val="9.175,13.125"/>
+        <dia:point val="9.025,13.275"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.12375,12.3375;12.2263,13.325"/>
+        <dia:rectangle val="5.97375,12.4875;12.0762,13.475"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -417,7 +417,7 @@
             <dia:real val="1.0583332926034927"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="9.175,13.125"/>
+            <dia:point val="9.025,13.275"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -523,10 +523,10 @@
     </dia:object>
     <dia:object type="Standard - Text" version="1" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="17.89,13.15"/>
+        <dia:point val="18.14,13.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.7513,12.3625;21.0288,13.35"/>
+        <dia:rectangle val="15.0013,12.5125;21.2788,13.5"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -540,7 +540,7 @@
             <dia:real val="1.0583332926034927"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="17.89,13.15"/>
+            <dia:point val="18.14,13.3"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -556,10 +556,10 @@
     </dia:object>
     <dia:object type="Standard - Text" version="1" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="13.69,2.85"/>
+        <dia:point val="13.69,2.65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.5625,2.0625;16.8175,3.05"/>
+        <dia:rectangle val="10.5625,1.8625;16.8175,2.85"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -573,7 +573,7 @@
             <dia:real val="1.0583332926034927"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="13.69,2.85"/>
+            <dia:point val="13.69,2.65"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -660,16 +660,17 @@ Pythonium
     </dia:object>
     <dia:object type="Standard - Text" version="1" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="20.89,4.25"/>
+        <dia:point val="20.94,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.4525,3.655;22.3275,5.2"/>
+        <dia:rectangle val="18.9913,3.405;22.8888,5.75"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Skulpt
-Brython#</dia:string>
+Brython
+Pythonium#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="sans" style="80" name="Helvetica-Bold"/>
@@ -678,7 +679,7 @@ Brython#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="20.89,4.25"/>
+            <dia:point val="20.94,4"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
