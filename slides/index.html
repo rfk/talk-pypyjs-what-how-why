@@ -54,11 +54,6 @@
   .deck-container .slide td + td {
     text-align: right;
   }
-  .deck-container .slide .pypy-speed {
-    text-align: center;
-    margin-top: 1.5em;
-    width: 60%;
-  }
   .deck-container .slide .venn-diagram {
     text-align: center;
     margin-top: 0.5em;
@@ -75,6 +70,15 @@
   .deck-container .slide .pypyjs-flow {
     text-align: center;
     width: 90%;
+  }
+  .fullscreener {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: white;
+    height: 10px;
+    width: 10px;
+    opacity: 0.1;
   }
   .run-timer {
     position: absolute;
@@ -150,6 +154,7 @@
   <div class="run-timer"></div>
 
   <section class="slide" style="text-align: center">
+  <div class="fullscreener">&nbsp;</div>
   <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   <p>Ryan Kelly<br />ryan@rfk.id.au</br>@rfkelly</p>
   </section>
@@ -262,15 +267,15 @@
   <div style="text-align: center">
   <table style="width: 90%; display: inline"><tr><td>
     <ul>
-    <li><span style="text-decoration: line-through">Pyjamas</span> PyJS</li>
+    <li>Pyjamas</li>
     <li>Skulpt</li>
     <li>Brython</li>
     <li>PythonJS</li>
-    <li>Rusthon</li>
     <li>RapydScript</li>
     </ul>
   </td><td style="width: 10%"></td><td style="text-align: left">
     <ul>
+    <li>Rusthon</li>
     <li>Pythonium</li>
     <li>Pystachio</li>
     <li>Pyjaco</li>
@@ -285,17 +290,17 @@
   </section>
 
   <section class="slide" run-time-waypoint="4m">
-  <h2>Compatibility</h2>
+  <h2>1)&nbsp;&nbsp;Compatibility</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide" run-time-waypoint="5m">
-  <h2>Speed</h2>
+  <h2>2)&nbsp;&nbsp;Performance</h2>
   <div class="pyconsole"></div>
   </section>
 
   <section class="slide" run-time-waypoint="6m">
-  <h2>Web-ish-ness</h2>
+  <h2>3)&nbsp;&nbsp;Web-ish-ness</h2>
   <div class="pyconsole"></div>
   </section>
 
@@ -334,8 +339,7 @@
   </section>
 
   <section class="slide">
-  <h1>PyPy.js = <br/>
-  PyPy + Emscripten</h1>
+  <h1>PyPy.js<br/>=<br/>PyPy + Emscripten</h1>
   </section>
 
   <section class="slide" run-time-waypoint="10m30">
@@ -636,7 +640,7 @@
   </section>
 
   <section class="slide" run-time-waypoint="24m">
-  <h1>Please, file bugs<br/>against the Web</h1>
+  <h1>File bugs<br/>against the Web</h1>
   </section>
 
   <section class="slide" run-time-waypoint="25m">
@@ -665,6 +669,7 @@ talkStartTime = None
 def onDeckChange(event, frm, to):
     global slide
     slide = jq.deck("getSlide", to)
+    jq(".fullscreener").appendTo(slide)
     # Display appropriate VM console for the new slide.
     py_console = slide.find(".pyconsole")
     py3k_console = slide.find(".py3kconsole")
@@ -817,7 +822,7 @@ js.globals.setInterval(updateRunTimer, 5 * 1000)
     vm.ready.then(function() {
       var startupCode = 'import code\n' +
                         'c = code.InteractiveConsole()\n' +
-                        'c.push("import os, sys")\n' +
+                        'c.push("import os, sys, gc")\n' +
                         'c.push("from binascii import hexlify")'
       return vm.eval(startupCode)
     });
@@ -875,6 +880,22 @@ js.globals.setInterval(updateRunTimer, 5 * 1000)
     $('img').each(function(i, elem) {
       var img = new Image();
       img.src = $(elem).attr('src');
+    });
+    // Enable full-screen mode by clicking on a button.
+    $('.fullscreener').each(function(i, elem) {
+      $(elem).bind("click", function() {
+        document.body.mozRequestFullScreen();
+        $('.fullscreener').hide();
+      });
+    });
+    $(document).bind("mozfullscreenchange", function(evt) {
+      console.log(evt);
+      $(".fullscreener").appendTo($.deck("getSlide"));
+      if (document.mozFullScreenElement) {
+        $(".fullscreener").hide()
+      } else {
+        $(".fullscreener").show()
+      }
     });
     // Bootstrap any python script tags.
     $('script').each(function(i, elem) {
