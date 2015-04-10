@@ -149,6 +149,11 @@
 
   <div class="run-timer"></div>
 
+  <section class="slide" style="text-align: center">
+  <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
+  <p>Ryan Kelly<br />ryan@rfk.id.au</br>@rfkelly</p>
+  </section>
+
   <section class="slide" style="text-align: center" run-time-waypoint="0">
   <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   <p>Ryan Kelly<br />ryan@rfk.id.au</br>@rfkelly</p>
@@ -239,7 +244,7 @@
   <blockquote>"I want to code in Python dammit"</blockquote>
   </section>
 
-  <section class="slide" style="text-align: center" run-time-waypoint="180">
+  <section class="slide" style="text-align: center" run-time-waypoint="3m">
   <h1>PyPy.js<p class='h1sub'>What? How? Why?</p></h1>
   </section>
 
@@ -248,7 +253,7 @@
   </section>
 
   <section class="slide">
-  <h2>PyPy.js: What?</h2>
+  <h2>PyPy.js:</h2>
   <div class="pyconsole"></div>
   </section>
 
@@ -275,22 +280,26 @@
   </div>
   </section>
 
-  <section class="slide" run-time-waypoint="240">
+  <section class="slide">
+  <h1>Three Boxes to Tick</h1>
+  </section>
+
+  <section class="slide" run-time-waypoint="4m">
   <h2>Compatibility</h2>
   <div class="pyconsole"></div>
   </section>
 
-  <section class="slide" run-time-waypoint="300">
+  <section class="slide" run-time-waypoint="5m">
   <h2>Speed</h2>
   <div class="pyconsole"></div>
   </section>
 
-  <section class="slide" run-time-waypoint="510">
+  <section class="slide" run-time-waypoint="6m">
   <h2>Web-ish-ness</h2>
   <div class="pyconsole"></div>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="8m">
   <div style="text-align: center">
   <img class="venn-diagram" src="./img/three_pick_two/venn0.svg" />
   </div>
@@ -320,7 +329,7 @@
   </div>
   </section>
 
-  <section class="slide" run-time-waypoint="780">
+  <section class="slide" run-time-waypoint="10m">
   <h1>How?</h1>
   </section>
 
@@ -329,7 +338,7 @@
   PyPy + Emscripten</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="10m30">
   <h2>PyPy:</h2>
   <ul>
   <li>A Python interpreter, written in "RPython"</li>
@@ -380,7 +389,7 @@
   </div>
   </section>
 
-  <section class="slide" run-time-waypoint="960">
+  <section class="slide" run-time-waypoint="13m">
   <h2>Emscripten:</h2>
   <ul>
   <li>An LLVM backend that generates JavaScript</li>
@@ -422,7 +431,7 @@
   </div>
   </section>
 
-  <section class="slide" run-time-waypoint="1110">
+  <section class="slide" run-time-waypoint="15m30">
   <h2>PyPy.js = PyPy + Emscripten</h2>
   <div style="text-align: center">
   <img class="pypyjs-flow" src="./img/pypyjs_flow/flow_diagram_0.svg" />
@@ -500,7 +509,7 @@
   <h1>It's awful<br/>all the way down</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="16m30">
   <h1>Worth It?</h1>
   </section>
 
@@ -528,7 +537,7 @@
   </div>
   </section>
 
-  <section class="slide" run-time-waypoint="1200">
+  <section class="slide" run-time-waypoint="20m">
   <h1>Why?</h1>
   </section>
 
@@ -548,7 +557,7 @@
   </div>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="21m">
   <h2>PyPy.js: Why?</h2>
   <span style="font-size:0.2em"><br/></span>
   <pre style="font-size: 1.5em">
@@ -572,7 +581,7 @@
   </ul>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="22m">
   <h1>py2exe</h1>
   </section>
 
@@ -584,7 +593,7 @@
   <h1>py2web<br/>+ webapp manifest</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="22m30">
   <h1>py2web<br/>+ webapp manifest<br/>+ apk factory</h1>
   </section>
 
@@ -600,7 +609,7 @@
   <h1>IPython<br />+ NumPyPy<br/>+ fortran libs</h1>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="23m">
   <h1>Free Stuff!</h1>
   </section>
 
@@ -625,11 +634,11 @@
   </div>
   </section>
 
-  <section class="slide">
+  <section class="slide" run-time-waypoint="24m">
   <h1>Please, file bugs<br/>against the Web</h1>
   </section>
 
-  <section class="slide" run-time-waypoint="1300">
+  <section class="slide" run-time-waypoint="25m">
   <div style="text-align: center">
     <br/>
     <p>http://pypyjs.org/</p>
@@ -683,7 +692,7 @@ def updateRunTimer():
     runTimer.removeClass("run-timer-on-track")
     runTimer.removeClass("run-timer-move-on")
     runTimer.removeClass("run-timer-hurry-up")
-    # Find the nearest slide with min/max runtime set.
+    # Find the index of the current slide, the slow-but-simple way.
     if slide is None or not slide.length:
         return
     curpos = 0
@@ -691,32 +700,66 @@ def updateRunTimer():
         if allSlides[str(curpos)] == slide["0"]:
             break
         curpos += 1
+    # Find the previous slide with waypoint set; this is the min runtime.
     i = curpos - 1
     runTimeMin = slide.attr("run-time-waypoint")
     while runTimeMin == js.undefined and i >= 0:
         runTimeMin = allSlides.eq(i).attr("run-time-waypoint")
         i -= 1
+    # Find the next slide with waypoint set; this is the max runtime.
     runTimeMax = js.undefined
     i = curpos + 1
     while runTimeMax == js.undefined and i < allSlides.length:
         runTimeMax = allSlides.eq(i).attr("run-time-waypoint")
         i += 1
     # Tweak status of runtime tracker accordingly.
-    if slide["0"] != allSlides["0"]:
+    # If we're on the first slide we reset to zero, otherwise we
+    # adjust its class based on where we are in the runtime bound.
+    if slide["0"] == allSlides["0"]:
+        talkStartTime = None
+    else:
         if talkStartTime is None:
             talkStartTime = int(time.time())
         runTime = int(time.time()) - talkStartTime;
-        runTimeMin = int(runTimeMin) if runTimeMin else 0
-        runTimeMax = int(runTimeMax) if runTimeMax else 0
+        runTimeMin = parseRunTimeWaypoint(runTimeMin)
+        runTimeMax = parseRunTimeWaypoint(runTimeMax)
         if runTimeMin and runTime < runTimeMin:
             runTimer.addClass("run-timer-slow-down")
         elif runTimeMax and runTime >= runTimeMax:
             runTimer.addClass("run-timer-hurry-up")
-        elif runTimeMax and runTime >= runTimeMax - 30:
+        elif runTimeMax and runTime >= runTimeMax - 15:
             runTimer.addClass("run-timer-move-on")
         else:
             runTimer.addClass("run-timer-on-track")
 
+
+def parseRunTimeWaypoint(waypoint):
+    waypoint = str((waypoint or "")).strip()
+    if "m" in waypoint:
+        mins, secs = waypoint.split("m", 1)
+    else:
+        mins = ""
+        secs = waypoint
+    return int(secs or "0") + int(mins or "0") * 60
+
+try:
+    assert parseRunTimeWaypoint("0") == 0
+    assert parseRunTimeWaypoint("01m05") == 65
+    assert parseRunTimeWaypoint("2m12") == 132
+    assert parseRunTimeWaypoint("15m") == 900
+    assert parseRunTimeWaypoint("180") == 180
+    runTimes = []
+    for i in xrange(allSlides.length):
+        rt = allSlides.eq(i).attr("run-time-waypoint")
+        if rt != js.undefined:
+            runTimes.append(parseRunTimeWaypoint(str(rt)))
+    assert runTimes[0] == 0
+    assert runTimes[-1] == 25 * 60
+    for i in xrange(1, len(runTimes)):
+        assert runTimes[i] > runTimes[i - 1]
+except Exception as e:
+    js.globals.console.log("ERROR", str(e))
+    raise
 
 jq(js.globals.document).bind("deck.change", onDeckChange)
 
@@ -773,7 +816,7 @@ js.globals.setInterval(updateRunTimer, 5 * 1000)
     vm.ready.then(function() {
       var startupCode = 'import code\n' +
                         'c = code.InteractiveConsole()\n' +
-                        'c.push("import os")\n' +
+                        'c.push("import os, sys")\n' +
                         'c.push("from binascii import hexlify")'
       return vm.eval(startupCode)
     });
